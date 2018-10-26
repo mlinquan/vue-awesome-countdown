@@ -1,0 +1,24 @@
+{
+  "name": "vue-awesome-countdown",
+  "version": "1.0.0",
+  "description": "Vue countdown plugin.",
+  "main": "vue-awesome-countdown.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlinquan/vue-awesome-countdown.git"
+  },
+  "keywords": [
+    "vue",
+    "countdown",
+    "timer"
+  ],
+  "author": "LinQuan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mlinquan/vue-awesome-countdown/issues"
+  },
+  "homepage": "https://github.com/mlinquan/vue-awesome-countdown#readme"
+}

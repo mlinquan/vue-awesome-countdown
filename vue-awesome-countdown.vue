@@ -1,0 +1,200 @@
+<template>
+  <components 
+    :is="tag" 
+    v-bind="attrs"
+    v-on="$listeners">
+    <slot 
+      v-bind="this._self"
+      name="before"/>
+    <slot 
+      v-if="state === 'process' || state === 'stoped'" 
+      v-bind="this._self"
+      name="process"/>
+    <slot 
+      v-if="state === 'finised'" 
+      v-bind="this._self"
+      name="finish"/>
+    <slot 
+      v-bind="this._self"
+      name="default"/>
+  </components>
+</template>
+
+<script>
+export default {
+  props: {
+    endTime: {
+      type: [String, Number, Date],
+      default: null
+    },
+    leftTime: {
+      type: Number,
+      default: 0
+    },
+    autoStart: {
+      type: Boolean,
+      default: true
+    },
+    speed: {
+      type: Number,
+      default: 1000,
+      validator: function(value) {
+        return value >= 0
+      }
+    },
+    tag: {
+      type: String,
+      default: 'span'
+    }
+  },
+  data() {
+    return {
+      state: 'beforeStart', //beforeStart, stoped, process, finised
+      attrs: {},
+      actualEndTime: null,
+      timeObj: {},
+      countdownTimer: null,
+      startTime: null,
+      runTimes: 0,
+      usedTime: 0
+    }
+  },
+  watch: {
+    speed(curSpeed, oldSpeed) {
+      const vm = this
+      if (curSpeed < 0) {
+        curSpeed = 0
+      }
+      if (curSpeed !== oldSpeed) {
+        clearTimeout(vm.countdownTimer)
+        const now = new Date().getTime()
+        const runTimes = Math.floor((now - vm.startTime) / curSpeed)
+        const nextTime = now % curSpeed
+        vm.runTimes = runTimes
+        vm.$nextTick(() => {
+          vm.countdownTimer = setTimeout(vm.doCountdown, nextTime)
+        })
+      }
+    }
+  },
+  created() {
+    const vm = this
+    if (vm.autoStart) {
+      vm.startCountdown(true)
+    }
+  },
+  methods: {
+    startCountdown(restart) {
+      const vm = this
+      if (vm.state !== 'beforeStart' && vm.state !== 'stoped' && !restart) {
+        return
+      }
+      if (restart) {
+        vm.runTimes = 0
+        vm.startTime = null
+        vm.actualEndTime = vm.endTime || new Date().getTime() + vm.leftTime
+        vm.$emit('onStart', vm)
+      }
+      vm.state = 'process'
+      vm.doCountdown()
+    },
+    stopCountdown() {
+      const vm = this
+      if (vm.state !== 'process') {
+        return
+      }
+      clearTimeout(vm.countdownTimer)
+      vm.$emit('on-start', vm)
+      vm.state = 'stoped'
+    },
+    switchCountdown() {
+      const vm = this
+      if (vm.state === 'stoped' || vm.state === 'beforeStart') {
+        return vm.startCountdown()
+      }
+      if (vm.state === 'process') {
+        return vm.stopCountdown()
+      }
+    },
+    finishCountdown() {
+      const vm = this
+      vm.state = 'finised'
+      vm.timeObj = {}
+      vm.usedTime = new Date().getTime() - vm.startTime
+      vm.$emit('onFinish', vm)
+    },
+    doCountdown() {
+      const vm = this
+      if (vm.state !== 'process') {
+        return
+      }
+      if (!vm.startTime) {
+        vm.startTime = new Date().getTime()
+      }
+      let leftTime = new Date(vm.actualEndTime).getTime() - new Date().getTime()
+      if (leftTime > 0) {
+        const t = {}
+        const leftSeconds = leftTime / 1000
+
+        const org = {
+          d: leftSeconds / 60 / 60 / 24,
+          h: (leftSeconds / 60 / 60) % 24,
+          m: (leftSeconds / 60) % 60,
+          s: leftSeconds % 60,
+          ms: leftTime % 1000
+        }
+
+        const txt = {
+          d: parseInt(org.d, 10).toString(),
+          h: parseInt(org.h, 10)
+            .toString()
+            .padStart(2, 0),
+          m: parseInt(org.m, 10)
+            .toString()
+            .padStart(2, 0),
+          s: parseInt(org.s, 10)
+            .toString()
+            .padStart(2, 0),
+          ms: org.ms.toString().padStart(3, 0)
+        }
+
+        const ceil = {
+          d: parseInt(Math.ceil(org.d), 10).toString(),
+          h: parseInt(Math.ceil(org.h), 10)
+            .toString()
+            .padStart(2, 0),
+          m: parseInt(Math.ceil(org.m), 10)
+            .toString()
+            .padStart(2, 0),
+          s: parseInt(Math.ceil(org.s), 10)
+            .toString()
+            .padStart(2, 0)
+        }
+
+        t.endTime = vm.actualEndTime
+        t.speed = vm.speed
+        vm.usedTime = new Date().getTime() - vm.startTime
+        t.leftTime = leftTime
+        vm.timeObj = Object.assign({}, t, txt, {
+          org,
+          ceil
+        })
+        vm.timeObj.org = org
+        vm.timeObj.ceil = ceil
+        vm.$emit('onProcess', vm)
+      } else {
+        vm.finishCountdown()
+        return
+      }
+
+      let nextSpeed =
+        vm.speed +
+        (vm.startTime + vm.runTimes++ * vm.speed - new Date().getTime())
+      if (nextSpeed < 0) {
+        nextSpeed = nextSpeed + vm.speed
+      }
+      vm.countdownTimer = setTimeout(vm.doCountdown, nextSpeed)
+    }
+  }
+}
+</script>

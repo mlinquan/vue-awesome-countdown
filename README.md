@@ -42,6 +42,18 @@ Vue.use(vueAwesomeCountdown)
 </countdown>
 ```
 
+### SSR (Nuxt)
+```html
+<no-ssr>
+  <countdown :end-time="new Date().getTime() + 60000">
+    <span
+      slot="process"
+      slot-scope="{ timeObj }">{{ `Lefttime: ${timeObj.ceil.m}:${timeObj.ceil.s}` }}</span>
+    <span slot="finish">Done!</span>
+  </countdown>
+</no-ssr>
+```
+
 ## Example demo
 
 http://linquan.me/vue-awesome-countdown

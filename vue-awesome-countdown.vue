@@ -159,16 +159,10 @@ export default {
         }
 
         const ceil = {
-          d: parseInt(Math.ceil(org.d), 10).toString(),
-          h: parseInt(Math.ceil(org.h), 10)
-            .toString()
-            .padStart(2, 0),
-          m: parseInt(Math.ceil(org.m), 10)
-            .toString()
-            .padStart(2, 0),
-          s: parseInt(Math.ceil(org.s), 10)
-            .toString()
-            .padStart(2, 0)
+          d: parseInt(Math.ceil(leftSeconds / 60 / 60 / 24), 10),
+          h: parseInt(Math.ceil(leftSeconds / 60 / 60), 10),
+          m: parseInt(Math.ceil(leftSeconds / 60), 10),
+          s: parseInt(Math.ceil(leftSeconds), 10)
         }
 
         t.endTime = vm.actualEndTime

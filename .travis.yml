@@ -1,7 +1,7 @@
 language: node_js
 # nodejs version
 node_js: 
-    - '10.14.1'
+    - '8.12.0'
 
 # Travis-CI Caching
 cache:
@@ -11,11 +11,11 @@ cache:
 
 # S: Build Lifecycle
 install:
-  - npm install -g vuepress
+  - yarn global add vuepress
 
 before_script:
-  - git clone -b gh-pages "https://${GH_TOKEN}@${GH_REF}" vuepress
-  - rm ./vuepress/* -fr
+  - git clone -b gh-pages "https://${GH_TOKEN}@${GH_REF}" .vuepress
+  - rm ./.vuepress/* -fr
 
 # build
 script:
@@ -23,8 +23,9 @@ script:
   - vuepress build
 
 after_script:
-  - cd ../vuepress
-  - git add --all .
+  - cd ../.vuepress
+  - echo 'vue-awesome-countdown.js.org' > CNAME
+  - git add -A
   - git commit -m "Update docs."
   - git push --quiet --force  "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
 

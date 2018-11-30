@@ -22,7 +22,7 @@ script:
   - cd ./docs
   - vuepress build
   - cd ../
-  - cp -fv ./vuepress/* ./.vuepress
+  - cp -ri ./vuepress/* ./.vuepress/
 
 after_script:
   - cd ./.vuepress

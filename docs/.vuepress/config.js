@@ -1,5 +1,5 @@
 module.exports = {
-  dest: '../.vuepress',
+  dest: '../vuepress',
   contentLoading: true,
   locales: {
     '/': {

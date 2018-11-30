@@ -1,7 +1,7 @@
 language: node_js
 # nodejs version
 node_js: 
-    - '8.12.0'
+    - '10.14.1'
 
 # Travis-CI Caching
 cache:
@@ -11,22 +11,25 @@ cache:
 
 # S: Build Lifecycle
 install:
-  - npm install
+  - npm install -g vuepress
 
 before_script:
+  - git clone -b gh-pages "https://${GH_TOKEN}@${GH_REF}" vuepress
+  - rm ./vuepress/* -fr
 
 # build
 script:
-  - npm run build
+  - cd ./docs
+  - vuepress build
 
 after_script:
-  - cd ./dist
+  - cd ./vuepress
   - git add --all .
-  - git commit -m "Update demo page"
+  - git commit -m "Update docs."
   - git push --quiet --force  "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
 
 branches:
   only:
-    - example
+    - master
 env:
  global:

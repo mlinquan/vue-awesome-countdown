@@ -1,6 +1,6 @@
 {
   "name": "vue-awesome-countdown",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Vue countdown plugin.",
   "main": "vue-awesome-countdown.js",
   "scripts": {
@@ -20,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/mlinquan/vue-awesome-countdown/issues"
   },
-  "homepage": "https://github.com/mlinquan/vue-awesome-countdown#readme"
+  "homepage": "https://github.com/mlinquan/vue-awesome-countdown#readme",
+  "dependencies": {}
 }

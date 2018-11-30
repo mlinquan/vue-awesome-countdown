@@ -34,23 +34,23 @@ Vue.use(vueAwesomeCountdown)
 ```
 
 ```html
-<countdown :end-time="new Date().getTime() + 60000">
+<vac :end-time="new Date().getTime() + 60000">
   <span
     slot="process"
     slot-scope="{ timeObj }">{{ `Lefttime: ${timeObj.m}:${timeObj.s}` }}</span>
   <span slot="finish">Done!</span>
-</countdown>
+</vac>
 ```
 
 ### SSR (Nuxt)
 ```html
 <no-ssr>
-  <countdown :end-time="new Date().getTime() + 60000">
+  <vac :end-time="new Date().getTime() + 60000">
     <span
       slot="process"
       slot-scope="{ timeObj }">{{ `Lefttime: ${timeObj.m}:${timeObj.s}` }}</span>
     <span slot="finish">Done!</span>
-  </countdown>
+  </vac>
 </no-ssr>
 ```
 

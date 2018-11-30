@@ -1,6 +1,6 @@
 {
   "name": "vue-awesome-countdown",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Vue countdown plugin.",
   "main": "vue-awesome-countdown.js",
   "scripts": {

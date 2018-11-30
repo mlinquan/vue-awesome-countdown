@@ -26,7 +26,7 @@ script:
 
 after_script:
   - cd ./.vuepress
-  - echo 'vue-awesome-countdown.js.org' > CNAME
+  - echo 'vac.js.org' > CNAME
   - git add -A
   - git commit -m "Update docs."
   - git push --quiet --force  "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages

@@ -23,7 +23,7 @@ script:
   - vuepress build
 
 after_script:
-  - cd ../.vuepress
+  - cd ./.vuepress
   - echo 'vue-awesome-countdown.js.org' > CNAME
   - git add -A
   - git commit -m "Update docs."

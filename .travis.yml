@@ -21,9 +21,10 @@ before_script:
 script:
   - cd ./docs
   - vuepress build
+  - cd ../
+  - cp -fv ./vuepress/* ./.vuepress
 
 after_script:
-  - pwd
   - cd ./.vuepress
   - echo 'vue-awesome-countdown.js.org' > CNAME
   - git add -A

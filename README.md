@@ -56,7 +56,7 @@ Vue.use(vueAwesomeCountdown)
 
 ## Example demo
 
-<a href="http://linquan.me/vue-awesome-countdown">http://linquan.me/vue-awesome-countdown</a>
+https://vac.js.org
 
 ## Props
 

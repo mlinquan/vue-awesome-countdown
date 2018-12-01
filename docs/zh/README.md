@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: ../vac_logo.png
+heroImage: /vac_logo.png
 actionText: 快速上手 →
 actionLink: /guide/
 features:

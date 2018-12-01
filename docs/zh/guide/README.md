@@ -62,6 +62,7 @@ Vue.use(vueAwesomeCountdown)
 
 | Prop | Required | Explain | Type | Default |
 | ------ | ------ | ------ | ------ | ------ |
+| startTime | can be used in conjunction with `endTime` or `leftTime` | Time stamp of countdown start | `[String, Number, Date]` | `null` |
 | endTime | when `leftTime` undefined | Time stamp of countdown end | `[String, Number, Date]` | `null` |
 | leftTime | when `endTime` undefined | Remaining milliseconds of countdown end |  `Number` | `0` |
 | autoStart | `false` | Start countdown automatically | `Boolean` | `true` |
@@ -79,7 +80,7 @@ The data can get it through `slot-scop` or `methods`.
 | actualEndTime | Actual countdown end time | `null` |
 | timeObj | <a href="#timeobj">Look look</a> |  `{}` |
 | countdownTimer | The countdown timer function, Do not use as much as possible. |`null` |
-| startTime | The countdown start time. | `null` |
+| actualStartTime | Actual countdown start time. | `null` |
 | runTimes | Countdown run times (The `onProcess` methods run times) | `0` |
 | usedTime | The total time consuming from the countdown to the end. | `0` |
 

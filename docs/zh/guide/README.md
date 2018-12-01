@@ -62,7 +62,7 @@ Vue.use(vueAwesomeCountdown)
 
 | Prop | Required | Explain | Type | Default |
 | ------ | ------ | ------ | ------ | ------ |
-| startTime | can be used in conjunction with `endTime` or `leftTime` | Time stamp of countdown start | `[String, Number, Date]` | `null` |
+| startTime | `false` | Time stamp of countdown start | `[String, Number, Date]` | `null` |
 | endTime | when `leftTime` undefined | Time stamp of countdown end | `[String, Number, Date]` | `null` |
 | leftTime | when `endTime` undefined | Remaining milliseconds of countdown end |  `Number` | `0` |
 | autoStart | `false` | Start countdown automatically | `Boolean` | `true` |

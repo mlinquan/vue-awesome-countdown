@@ -1,6 +1,4 @@
-# Examples
-
-## Basic Usage
+# Basic Usage
 
 <template>
 <ClientOnly>

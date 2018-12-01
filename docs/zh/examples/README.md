@@ -1,6 +1,4 @@
-# 示例
-
-## 基础用法
+# 基础用法
 
 <template>
 <ClientOnly>

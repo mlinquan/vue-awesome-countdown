@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /hero.png
+heroImage: ./vac_logo.png
 actionText: Get Started →
 actionLink: /zh/guide/
 features:

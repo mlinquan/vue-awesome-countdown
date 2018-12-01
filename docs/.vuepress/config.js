@@ -31,8 +31,7 @@ module.exports = {
         nav: require('./nav/en'),
         sidebar: {
           '/guide/': getGuideSidebar('Guide'),
-          '/plugin/': getPluginSidebar('Plugin', 'Introduction'),
-          '/theme/': getThemeSidebar('Theme', 'Introduction'),
+          '/examples/': getExamplesSidebar('Examples')
         }
       },
       '/zh/': {
@@ -43,8 +42,7 @@ module.exports = {
         nav: require('./nav/zh'),
         sidebar: {
           '/zh/guide/': getGuideSidebar('指南'),
-          '/zh/plugin/': getPluginSidebar('插件', '介绍'),
-          '/zh/theme/': getThemeSidebar('主题', '介绍')
+          '/zh/examples/': getExamplesSidebar('示例')
         }
       }
     }
@@ -71,35 +69,13 @@ function getGuideSidebar (groupA, groupB) {
   ]
 }
 
-function getPluginSidebar (groupA, introductionA) {
+function getExamplesSidebar (groupA, introductionA) {
   return [
     {
       title: groupA,
       collapsable: false,
       children: [
-        ['', introductionA],
-        'using-a-plugin',
-        'writing-a-plugin',
-        'life-cycle',
-        'option-api',
-        'context-api',
-        'official'
-      ]
-    },
-  ]
-}
-
-function getThemeSidebar (groupA, introductionA) {
-  return [
-    {
-      title: groupA,
-      collapsable: false,
-      children: [
-        ['', introductionA],
-        'using-a-theme',
-        'writing-a-theme',
-        'option-api',
-        'default-theme-config'
+        ''
       ]
     },
   ]

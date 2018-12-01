@@ -103,7 +103,6 @@ export default {
 
 <script>
 import vac from '../../vue-awesome-countdown.vue'
-import axios from 'axios'
 export default {
   components: { vac },
   data() {

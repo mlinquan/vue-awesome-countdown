@@ -75,7 +75,8 @@ function getExamplesSidebar (groupA, introductionA) {
       title: groupA,
       collapsable: false,
       children: [
-        ''
+        '',
+        'send-sms-code'
       ]
     },
   ]

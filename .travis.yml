@@ -23,7 +23,7 @@ script:
   - vuepress build
   - cd ../
   - cp -ri ./vuepress/* ./.vuepress/
-  - cp ./docs/hero.png ./.vuepress/
+  - cp ./docs/vac_logo.png ./.vuepress/
 
 after_script:
   - cd ./.vuepress

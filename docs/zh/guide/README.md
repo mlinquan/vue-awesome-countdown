@@ -8,16 +8,11 @@ Countdown plug-in with high performance and high accuracy for [Vue](http://vuejs
 
 ## Installation
 
-Install via NPM...
+Install
 
 ```sh
 $ npm install vue-awesome-countdown --save
-# yarn add vue-awesome-countdown
-```
-
-Install via yarn...
-
-```sh
+# or
 $ yarn add vue-awesome-countdown
 ```
 

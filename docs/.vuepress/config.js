@@ -4,12 +4,12 @@ module.exports = {
   locales: {
     '/': {
       lang: 'en-US',
-      title: 'vue-awesome-countdown',
+      title: 'VAC (vue-awesome-countdown)',
       description: 'Countdown plug-in with high performance and high accuracy for Vue 2.5.0+.'
     },
     '/zh/': {
       lang: 'zh-CN',
-      title: 'vue-awesome-countdown',
+      title: 'VAC (vue-awesome-countdown)',
       description: '适用于Vue 2.5.0+的高性能高精度倒计时插件。'
     }
   },

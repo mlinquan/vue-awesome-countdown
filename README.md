@@ -56,7 +56,7 @@ Vue.use(vueAwesomeCountdown)
 
 ## Example demo
 
-https://vac.js.org
+[https://vac.js.org](https://vac.js.org)
 
 ## Props
 

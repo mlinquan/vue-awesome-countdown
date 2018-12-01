@@ -12,6 +12,13 @@ Install via NPM...
 
 ```sh
 $ npm install vue-awesome-countdown --save
+# yarn add vue-awesome-countdown
+```
+
+Install via yarn...
+
+```sh
+$ yarn add vue-awesome-countdown
 ```
 
 ...and import and use the plugin like so:
@@ -19,7 +26,7 @@ $ npm install vue-awesome-countdown --save
 ```js
 import vueAwesomeCountdown from 'vue-awesome-countdown'
 
-Vue.use(vueAwesomeCountdown)
+Vue.use(vueAwesomeCountdown, 'vac') // Component name, `countdown` and `vac` by default
 ```
 
 ## Usage

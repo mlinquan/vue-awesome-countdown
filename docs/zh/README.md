@@ -52,3 +52,19 @@ export default {
   components: { countdown }
 }
 </script>
+
+<style>
+.hero>img{
+  max-width: 100%;
+}
+@media (max-width: 419px) {
+  .navbar .site-name{
+    color: transparent;
+    white-space: nowrap;
+  }
+  .navbar .site-name:before{
+    content: 'VAC';
+    color: #2c3e50;
+  }
+}
+</style>

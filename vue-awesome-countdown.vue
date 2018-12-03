@@ -11,6 +11,10 @@
       v-bind="this._self"
       name="before"/>
     <slot 
+      v-if="state === 'preheat'"
+      v-bind="this._self"
+      name="preheat"/>
+    <slot 
       v-if="state === 'process' || state === 'stoped'" 
       v-bind="this._self"
       name="process"/>
@@ -97,6 +101,7 @@ export default {
     const startTime = (vm.startTime && new Date(vm.startTime).getTime()) || 0
     const firstTime = (startTime && startTime - new Date().getTime()) || 0
     if (vm.autoStart) {
+      vm.state = 'preheat'
       setTimeout(() => {
         vm.startCountdown(true)
       }, firstTime)

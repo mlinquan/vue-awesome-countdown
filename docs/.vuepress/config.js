@@ -1,6 +1,9 @@
 module.exports = {
   dest: 'vuepress',
   contentLoading: true,
+  head: [
+    ['link', { type: 'text/css', rel: 'stylesheet', href: '/css/common.css' }]
+  ],
   locales: {
     '/': {
       lang: 'en-US',
@@ -76,7 +79,8 @@ function getExamplesSidebar (groupA, introductionA) {
       collapsable: false,
       children: [
         '',
-        'send-sms-code'
+        'send-sms-code',
+        'event-start-time'
       ]
     },
   ]

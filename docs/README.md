@@ -44,19 +44,3 @@ footer: MIT Licensed | Copyright © 2018-present Lin Quan | Powered by Vuepress
 vue-awesome-countdown requires Node.js >= 8, <br>
 Vue.js >= 2.5.0.
 :::
-
-<style>
-.hero>img{
-  max-width: 100%;
-}
-@media (max-width: 419px) {
-  .navbar .site-name{
-    color: transparent;
-    white-space: nowrap;
-  }
-  .navbar .site-name:before{
-    content: 'VAC';
-    color: #2c3e50;
-  }
-}
-</style>

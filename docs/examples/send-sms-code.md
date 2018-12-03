@@ -102,9 +102,7 @@ export default {
 ```
 
 <script>
-import vac from '../../vue-awesome-countdown.vue'
 export default {
-  components: { vac },
   data() {
     return {
       buttonTxt: 'Send SMS code'

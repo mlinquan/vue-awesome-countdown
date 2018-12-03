@@ -1,11 +1,8 @@
 {
   "name": "vue-awesome-countdown",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Vue countdown plugin.",
   "main": "vue-awesome-countdown.js",
-  "scripts": {
-    "deploy": "sh deploy.sh"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mlinquan/vue-awesome-countdown.git"

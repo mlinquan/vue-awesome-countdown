@@ -45,14 +45,6 @@ footer: MIT Licensed | Copyright © 2018-present Lin Quan
 Vue.js 版本 >= 2.5.0。
 :::
 
-
-<script>
-import countdown from '../../vue-awesome-countdown.vue'
-export default {
-  components: { countdown }
-}
-</script>
-
 <style>
 .hero>img{
   max-width: 100%;

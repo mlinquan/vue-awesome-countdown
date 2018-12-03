@@ -45,14 +45,6 @@ vue-awesome-countdown requires Node.js >= 8, <br>
 Vue.js >= 2.5.0.
 :::
 
-
-<script>
-import countdown from '../vue-awesome-countdown.vue'
-export default {
-  components: { countdown }
-}
-</script>
-
 <style>
 .hero>img{
   max-width: 100%;

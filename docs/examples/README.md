@@ -23,10 +23,3 @@
       <span slot="finish">Done!</span>
   </vac>
 ```
-
-<script>
-import vac from '../../vue-awesome-countdown.vue'
-export default {
-  components: { vac }
-}
-</script>

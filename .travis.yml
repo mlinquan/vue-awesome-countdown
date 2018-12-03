@@ -13,24 +13,18 @@ cache:
 install:
   - yarn global add vuepress
 
-before_script:
-  - git clone -b gh-pages "https://${GH_TOKEN}@${GH_REF}" .vuepress
-  - rm ./.vuepress/* -fr
-
 # build
 script:
-  - cd ./docs
-  - vuepress build
-  - cd ../
-  - cp -ri ./vuepress/* ./.vuepress/
-  - cp ./docs/vac_logo.png ./.vuepress/
+  - vuepress build docs
 
 after_script:
-  - cd ./.vuepress
+  - cd vuepress
   - echo 'vac.js.org' > CNAME
+
+  - git init
   - git add -A
-  - git commit -m "Update docs."
-  - git push --quiet --force  "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
+  - git commit -m 'deploy'
+  - git push --quiet --force "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
 
 branches:
   only:

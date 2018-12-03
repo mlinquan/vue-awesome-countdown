@@ -2,7 +2,7 @@
 home: true
 heroImage: /vac_logo.png
 actionText: 快速上手 →
-actionLink: /guide/
+actionLink: /zh/guide/
 features:
 - title: 易用
   details: 代码简洁的同时有着丰富的插槽(slots)和方法(methods)，可应对多种场景。

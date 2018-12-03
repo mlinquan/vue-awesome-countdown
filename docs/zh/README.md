@@ -10,7 +10,7 @@ features:
   details: 整个流程下来与预期结束时间误差仅为1~3毫秒。
 - title: 轻量级
   details: gzip压缩后不到2kb。
-footer: MIT Licensed | Copyright © 2018-present Lin Quan
+footer: MIT Licensed | Copyright © 2018-present Lin Quan | 自豪地采用Vuepress
 ---
 <template>
 <ClientOnly>

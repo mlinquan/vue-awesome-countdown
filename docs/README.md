@@ -10,7 +10,7 @@ features:
   details: The error between the whole process and the expected end time is only 1-3 milliseconds.
 - title: Lightweight
   details: Gzip compression is less than 2 kb.
-footer: MIT Licensed | Copyright © 2018-present Lin Quan
+footer: MIT Licensed | Copyright © 2018-present Lin Quan | Powered by Vuepress
 ---
 <template>
 <ClientOnly>

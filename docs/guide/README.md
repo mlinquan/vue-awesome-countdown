@@ -16,12 +16,33 @@ $ npm install vue-awesome-countdown --save
 $ yarn add vue-awesome-countdown
 ```
 
-...and import and use the plugin like so:
+### ES6
 
 ```js
+
 import vueAwesomeCountdown from 'vue-awesome-countdown'
 
 Vue.use(vueAwesomeCountdown, 'vac') // Component name, `countdown` and `vac` by default
+```
+
+### CommonJS
+
+```js
+var Vue = require('vue');
+var vueAwesomeCountdown = require('vue-awesome-countdown').default;
+
+Vue.use(vueAwesomeCountdown);
+```
+
+### Browser
+
+```html
+<script src="https://unpkg.com/vue@latest"></script>
+<script src="https://unpkg.com/vue-awesome-countdown@latest"></script>
+<!-- OR -->
+<script src="path/to/vue/vue.min.js"></script>
+<script src="path/to/vue-awesome-countdown/dist/vue-awesome-countdown.umd.min.js"></script>
+
 ```
 
 ## Usage

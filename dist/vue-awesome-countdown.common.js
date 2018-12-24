@@ -453,14 +453,19 @@ component.options.__file = "vue-awesome-countdown.vue"
 // CONCATENATED MODULE: ./src/vue-awesome-countdown.js
 
 
-/* harmony default export */ var src_vue_awesome_countdown = ({
+const vac = {
   install(Vue, name) {
     name = name || 'vac'
     Vue.component(name, vue_awesome_countdown)
     Vue.component('countdown', vue_awesome_countdown)
   }
-});
+}
 
+if (typeof window !== "undefined" && window.Vue) {
+  window.Vue.use(vac)
+}
+
+/* harmony default export */ var src_vue_awesome_countdown = (vac);
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 

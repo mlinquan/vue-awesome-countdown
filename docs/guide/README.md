@@ -1,6 +1,6 @@
 # vue-awesome-countdown
 [![npm version](https://badge.fury.io/js/vue-awesome-countdown.svg)](https://badge.fury.io/js/vue-awesome-countdown)
-[![Gzip Size](http://img.badgesize.io/https://unpkg.com/vue-awesome-countdown/vue-awesome-countdown.vue?compression=gzip&style=flat-square)](https://unpkg.com/vue-awesome-countdown)
+[![Gzip Size](http://img.badgesize.io/https://unpkg.com/vue-awesome-countdown@latest/dist/vue-awesome-countdown.umd.min.js?compression=gzip&style=flat-square)](https://unpkg.com/vue-awesome-countdown)
 [![Monthly Downloads](https://img.shields.io/npm/dm/vue-awesome-countdown.svg)](https://www.npmjs.com/package/vue-awesome-countdown)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

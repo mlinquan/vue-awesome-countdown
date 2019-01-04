@@ -1,8 +1,8 @@
 import vueAwesomeCountdown from './vue-awesome-countdown.vue'
 
 const vac = {
-  install(Vue, name) {
-    name = name || 'vac'
+  install: function (Vue, options) {
+    const name = options || 'vac'
     Vue.component(name, vueAwesomeCountdown)
     Vue.component('countdown', vueAwesomeCountdown)
   }

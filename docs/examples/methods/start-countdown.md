@@ -6,7 +6,7 @@
   <button type="button" @click="() => {
     this.$refs.vac1.startCountdown(true)
   }">Start</button>
-  <vac :end-time="new Date().getTime() + 10000" :auto-start="false" ref="vac1">
+  <vac :left-time="10000" :auto-start="false" ref="vac1">
     <span
       slot="process"
       slot-scope="{ timeObj }">
@@ -16,7 +16,7 @@
   </vac>
   <p>example2: </p>
   <button type="button" @click="startCountdown">Start</button>
-  <vac :end-time="new Date().getTime() + 10000" :auto-start="false" ref="vac2">
+  <vac :left-time="10000" :auto-start="false" ref="vac2">
     <span
       slot="process"
       slot-scope="{ timeObj }">
@@ -32,7 +32,7 @@
 <button type="button" @click="() => {
   this.$refs.vac.startCountdown(true)
 }">
-<vac :end-time="new Date().getTime() + 10000" :auto-start="false" ref="vac1">
+<vac :left-time="10000" :auto-start="false" ref="vac1">
   <span
     slot="process"
     slot-scope="{ timeObj }">
@@ -45,7 +45,7 @@
 ``` vue
 <p>example2: </p>
 <button type="button" @click="startCountdown">
-<vac :end-time="new Date().getTime() + 10000" :auto-start="false" ref="vac2">
+<vac :left-time="10000" :auto-start="false" ref="vac2">
   <span
     slot="process"
     slot-scope="{ timeObj }">

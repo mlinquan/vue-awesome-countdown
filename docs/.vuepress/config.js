@@ -34,7 +34,7 @@ module.exports = {
         nav: require('./nav/en'),
         sidebar: {
           '/guide/': getGuideSidebar('Guide'),
-          '/examples/': getExamplesSidebar('Examples')
+          '/examples/': getExamplesSidebar('Examples', 'Mehtods')
         }
       },
       '/zh/': {
@@ -45,7 +45,7 @@ module.exports = {
         nav: require('./nav/zh'),
         sidebar: {
           '/zh/guide/': getGuideSidebar('指南'),
-          '/zh/examples/': getExamplesSidebar('示例')
+          '/zh/examples/': getExamplesSidebar('示例', '方法')
         }
       }
     }
@@ -72,7 +72,7 @@ function getGuideSidebar (groupA, groupB) {
   ]
 }
 
-function getExamplesSidebar (groupA, introductionA) {
+function getExamplesSidebar (groupA, groupB) {
   return [
     {
       title: groupA,
@@ -81,6 +81,17 @@ function getExamplesSidebar (groupA, introductionA) {
         '',
         'send-sms-code',
         'event-start-time'
+      ]
+    },
+    {
+      title: groupB,
+      collapsable: false,
+      children: [
+        'methods/start-countdown',
+        'methods/stop-countdown',
+        'methods/switch-countdown',
+        'methods/finish-countdown',
+        'methods/all-methods'
       ]
     },
   ]

@@ -463,8 +463,8 @@ component.options.__file = "vue-awesome-countdown.vue"
 
 
 const vac = {
-  install(Vue, name) {
-    name = name || 'vac'
+  install: function (Vue, options) {
+    const name = options || 'vac'
     Vue.component(name, vue_awesome_countdown)
     Vue.component('countdown', vue_awesome_countdown)
   }

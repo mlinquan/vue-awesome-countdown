@@ -96,6 +96,49 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ "f6fd":
+/***/ (function(module, exports) {
+
+// document.currentScript polyfill by Adam Miller
+
+// MIT license
+
+(function(document){
+  var currentScript = "currentScript",
+      scripts = document.getElementsByTagName('script'); // Live NodeList collection
+
+  // If browser needs currentScript polyfill, add get currentScript() to the document object
+  if (!(currentScript in document)) {
+    Object.defineProperty(document, currentScript, {
+      get: function(){
+
+        // IE 6-10 supports script readyState
+        // IE 10+ support stack trace
+        try { throw new Error(); }
+        catch (err) {
+
+          // Find the second match for the "at" string to get file src url from stack.
+          // Specifically works with the format of stack traces in IE.
+          var i, res = ((/.*at [^\(]*\((.*):.+:.+\)$/ig).exec(err.stack) || [false])[1];
+
+          // For all scripts on the page, if src matches or if ready state is interactive, return the script tag
+          for(i in scripts){
+            if(scripts[i].src == res || scripts[i].readyState == "interactive"){
+              return scripts[i];
+            }
+          }
+
+          // If no match, return null
+          return null;
+        }
+      }
+    });
+  }
+})(document);
+
+
+/***/ }),
+
 /***/ "fb15":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -106,6 +149,10 @@ __webpack_require__.r(__webpack_exports__);
 // This file is imported into lib/wc client bundles.
 
 if (typeof window !== 'undefined') {
+  if (true) {
+    __webpack_require__("f6fd")
+  }
+
   var i
   if ((i = window.document.currentScript) && (i = i.src.match(/(.+\/)[^/]+\.js(\?.*)?$/))) {
     __webpack_require__.p = i[1] // eslint-disable-line
@@ -115,12 +162,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ca0e2238-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=template&id=4f6ab8f0&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1ec0e0fa-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=template&id=02d64fc6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g(_vm._b({tag:"components"},'components',_vm.attrs,false),_vm.$listeners),[_vm._t("prev",null,null,this._self),(_vm.state === 'beforeStart')?_vm._t("before",null,null,this._self):_vm._e(),(_vm.state === 'preheat')?_vm._t("preheat",null,null,this._self):_vm._e(),(_vm.state === 'process' || _vm.state === 'stoped')?_vm._t("process",null,null,this._self):_vm._e(),(_vm.state === 'finised')?_vm._t("finish",null,null,this._self):_vm._e(),_vm._t("default",null,null,this._self)],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/vue-awesome-countdown.vue?vue&type=template&id=4f6ab8f0&
+// CONCATENATED MODULE: ./src/vue-awesome-countdown.vue?vue&type=template&id=02d64fc6&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=script&lang=js&
 //
@@ -253,7 +300,7 @@ var staticRenderFns = []
         return
       }
       clearTimeout(vm.countdownTimer)
-      vm.$emit('on-start', vm)
+      vm.$emit('onStop', vm)
       vm.state = 'stoped'
     },
     switchCountdown() {
@@ -457,7 +504,6 @@ var component = normalizeComponent(
   
 )
 
-component.options.__file = "vue-awesome-countdown.vue"
 /* harmony default export */ var vue_awesome_countdown = (component.exports);
 // CONCATENATED MODULE: ./src/vue-awesome-countdown.js
 

@@ -128,7 +128,7 @@ export default {
         return
       }
       clearTimeout(vm.countdownTimer)
-      vm.$emit('on-start', vm)
+      vm.$emit('onStop', vm)
       vm.state = 'stoped'
     },
     switchCountdown() {

@@ -101,7 +101,6 @@ export default {
     const vm = this
     const startTime = (vm.startTime && new Date(vm.startTime).getTime()) || 0
     const firstTime = (startTime && startTime - new Date().getTime()) || 0
-    vm.remainingTime = leftTime
     if (vm.autoStart) {
       vm.state = 'preheat'
       setTimeout(() => {
@@ -118,10 +117,9 @@ export default {
       if (restart) {
         vm.runTimes = 0
         vm.actualStartTime = null
-        vm.actualEndTime = vm.endTime || new Date().getTime() + vm.leftTime
-      } else {
-        vm.actualEndTime = vm.endTime || new Date().getTime() + vm.remainingTime
+        vm.remainingTime = vm.leftTime
       }
+      vm.actualEndTime = vm.endTime || new Date().getTime() + vm.remainingTime
       vm.$emit('onStart', vm)
       vm.state = 'process'
       vm.doCountdown()

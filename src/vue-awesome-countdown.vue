@@ -75,7 +75,8 @@ export default {
       timeObj: {},
       countdownTimer: null,
       runTimes: 0,
-      usedTime: 0
+      usedTime: 0,
+      remainingTime: 0
     }
   },
   watch: {
@@ -100,6 +101,7 @@ export default {
     const vm = this
     const startTime = (vm.startTime && new Date(vm.startTime).getTime()) || 0
     const firstTime = (startTime && startTime - new Date().getTime()) || 0
+    vm.remainingTime = leftTime
     if (vm.autoStart) {
       vm.state = 'preheat'
       setTimeout(() => {
@@ -117,8 +119,10 @@ export default {
         vm.runTimes = 0
         vm.actualStartTime = null
         vm.actualEndTime = vm.endTime || new Date().getTime() + vm.leftTime
-        vm.$emit('onStart', vm)
+      } else {
+        vm.actualEndTime = vm.endTime || new Date().getTime() + vm.remainingTime
       }
+      vm.$emit('onStart', vm)
       vm.state = 'process'
       vm.doCountdown()
     },
@@ -199,6 +203,7 @@ export default {
         })
         vm.timeObj.org = org
         vm.timeObj.ceil = ceil
+        vm.remainingTime = leftTime
         vm.$emit('onProcess', vm)
       } else {
         vm.finishCountdown()

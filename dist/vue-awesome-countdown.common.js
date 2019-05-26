@@ -106,12 +106,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ca0e2238-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=template&id=2a036043&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"ca0e2238-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=template&id=b4d4b7e0&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g(_vm._b({tag:"components"},'components',_vm.attrs,false),_vm.$listeners),[_vm._t("prev",null,null,this._self),(_vm.state === 'beforeStart')?_vm._t("before",null,null,this._self):_vm._e(),(_vm.state === 'preheat')?_vm._t("preheat",null,null,this._self):_vm._e(),(_vm.state === 'process' || _vm.state === 'stoped')?_vm._t("process",null,null,this._self):_vm._e(),(_vm.state === 'finised')?_vm._t("finish",null,null,this._self):_vm._e(),_vm._t("default",null,null,this._self)],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/vue-awesome-countdown.vue?vue&type=template&id=2a036043&
+// CONCATENATED MODULE: ./src/vue-awesome-countdown.vue?vue&type=template&id=b4d4b7e0&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=script&lang=js&
 //
@@ -191,7 +191,8 @@ var staticRenderFns = []
       timeObj: {},
       countdownTimer: null,
       runTimes: 0,
-      usedTime: 0
+      usedTime: 0,
+      remainingTime: 0
     }
   },
   watch: {
@@ -216,6 +217,7 @@ var staticRenderFns = []
     const vm = this
     const startTime = (vm.startTime && new Date(vm.startTime).getTime()) || 0
     const firstTime = (startTime && startTime - new Date().getTime()) || 0
+    vm.remainingTime = leftTime
     if (vm.autoStart) {
       vm.state = 'preheat'
       setTimeout(() => {
@@ -233,8 +235,10 @@ var staticRenderFns = []
         vm.runTimes = 0
         vm.actualStartTime = null
         vm.actualEndTime = vm.endTime || new Date().getTime() + vm.leftTime
-        vm.$emit('onStart', vm)
+      } else {
+        vm.actualEndTime = vm.endTime || new Date().getTime() + vm.remainingTime
       }
+      vm.$emit('onStart', vm)
       vm.state = 'process'
       vm.doCountdown()
     },
@@ -315,6 +319,7 @@ var staticRenderFns = []
         })
         vm.timeObj.org = org
         vm.timeObj.ceil = ceil
+        vm.remainingTime = leftTime
         vm.$emit('onProcess', vm)
       } else {
         vm.finishCountdown()

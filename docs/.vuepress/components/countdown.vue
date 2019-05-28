@@ -75,7 +75,8 @@ export default {
       timeObj: {},
       countdownTimer: null,
       runTimes: 0,
-      usedTime: 0
+      usedTime: 0,
+      remainingTime: 0
     }
   },
   watch: {
@@ -116,9 +117,10 @@ export default {
       if (restart) {
         vm.runTimes = 0
         vm.actualStartTime = null
-        vm.actualEndTime = vm.endTime || new Date().getTime() + vm.leftTime
         vm.$emit('onStart', vm)
+        vm.remainingTime = vm.leftTime
       }
+      vm.actualEndTime = vm.endTime || new Date().getTime() + (vm.remainingTime || vm.leftTime)
       vm.state = 'process'
       vm.doCountdown()
     },
@@ -128,7 +130,8 @@ export default {
         return
       }
       clearTimeout(vm.countdownTimer)
-      vm.$emit('on-start', vm)
+      vm.remainingTime = vm.leftTime - (new Date().getTime() - vm.actualStartTime)
+      vm.$emit('onStop', vm)
       vm.state = 'stoped'
     },
     switchCountdown() {
@@ -193,6 +196,7 @@ export default {
         t.speed = vm.speed
         vm.usedTime = new Date().getTime() - vm.actualStartTime
         t.leftTime = leftTime
+        vm.remainingTime = leftTime
         vm.timeObj = Object.assign({}, t, txt, {
           org,
           ceil

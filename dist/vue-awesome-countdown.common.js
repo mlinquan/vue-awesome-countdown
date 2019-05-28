@@ -106,12 +106,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ca0e2238-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=template&id=2a036043&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ca0e2238-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=template&id=729f1ea4&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g(_vm._b({tag:"components"},'components',_vm.attrs,false),_vm.$listeners),[_vm._t("prev",null,null,this._self),(_vm.state === 'beforeStart')?_vm._t("before",null,null,this._self):_vm._e(),(_vm.state === 'preheat')?_vm._t("preheat",null,null,this._self):_vm._e(),(_vm.state === 'process' || _vm.state === 'stoped')?_vm._t("process",null,null,this._self):_vm._e(),(_vm.state === 'finised')?_vm._t("finish",null,null,this._self):_vm._e(),_vm._t("default",null,null,this._self)],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/vue-awesome-countdown.vue?vue&type=template&id=2a036043&
+// CONCATENATED MODULE: ./src/vue-awesome-countdown.vue?vue&type=template&id=729f1ea4&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=script&lang=js&
 //
@@ -191,7 +191,8 @@ var staticRenderFns = []
       timeObj: {},
       countdownTimer: null,
       runTimes: 0,
-      usedTime: 0
+      usedTime: 0,
+      remainingTime: 0
     }
   },
   watch: {
@@ -232,9 +233,10 @@ var staticRenderFns = []
       if (restart) {
         vm.runTimes = 0
         vm.actualStartTime = null
-        vm.actualEndTime = vm.endTime || new Date().getTime() + vm.leftTime
         vm.$emit('onStart', vm)
+        vm.remainingTime = vm.leftTime
       }
+      vm.actualEndTime = vm.endTime || new Date().getTime() + (vm.remainingTime || vm.leftTime)
       vm.state = 'process'
       vm.doCountdown()
     },
@@ -244,6 +246,7 @@ var staticRenderFns = []
         return
       }
       clearTimeout(vm.countdownTimer)
+      vm.remainingTime = vm.leftTime - (new Date().getTime() - vm.actualStartTime)
       vm.$emit('onStop', vm)
       vm.state = 'stoped'
     },
@@ -309,6 +312,7 @@ var staticRenderFns = []
         t.speed = vm.speed
         vm.usedTime = new Date().getTime() - vm.actualStartTime
         t.leftTime = leftTime
+        vm.remainingTime = leftTime
         vm.timeObj = Object.assign({}, t, txt, {
           org,
           ceil

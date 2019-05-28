@@ -13,6 +13,11 @@
         :disabled="vac.state === 'process' || vac.state === 'finised'">Start</button>
       <button type="button"
         @click="() => {
+          vac.startCountdown(true)
+        }"
+        :disabled="vac.state !== 'finised' || vac.state !== 'stoped'">reStart</button>
+      <button type="button"
+        @click="() => {
           vac.stopCountdown()
         }"
         :disabled="vac.state === 'stoped' || vac.state === 'beforeStart' || vac.state === 'finised'">Stop</button>
@@ -26,11 +31,6 @@
         @click="() => {
           vac.finishCountdown()
         }">Finish</button>
-      <button type="button"
-        @click="() => {
-          vac.startCountdown(true)
-        }"
-        :disabled="vac.state !== 'finised'">reStart</button>
     </div>
     <span
       slot="process"
@@ -53,6 +53,11 @@
       }"
       :disabled="vac.state === 'process' || vac.state === 'finised'">Start</button>
     <button type="button"
+        @click="() => {
+          vac.startCountdown(true)
+        }"
+        :disabled="vac.state !== 'finised' || vac.state !== 'stoped'">reStart</button>
+    <button type="button"
       @click="() => {
         vac.stopCountdown()
       }"
@@ -67,11 +72,6 @@
       @click="() => {
         vac.finishCountdown()
       }">Finish</button>
-    <button type="button"
-      @click="() => {
-        vac.startCountdown(true)
-      }"
-      :disabled="vac.state !== 'finised'">reStart</button>
   </div>
   <span
     slot="process"

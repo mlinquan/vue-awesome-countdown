@@ -1,28 +1,28 @@
 <template>
-  <components 
-    :is="tag" 
+  <components
+    :is="tag"
     v-bind="attrs"
     v-on="$listeners">
-    <slot 
+    <slot
       v-bind="this._self"
       name="prev"/>
-    <slot 
+    <slot
       v-if="state === 'beforeStart'"
       v-bind="this._self"
       name="before"/>
-    <slot 
+    <slot
       v-if="state === 'preheat'"
       v-bind="this._self"
       name="preheat"/>
-    <slot 
-      v-if="state === 'process' || state === 'stoped'" 
+    <slot
+      v-if="state === 'process' || state === 'stoped'"
       v-bind="this._self"
       name="process"/>
-    <slot 
-      v-if="state === 'finised'" 
+    <slot
+      v-if="state === 'finised'"
       v-bind="this._self"
       name="finish"/>
-    <slot 
+    <slot
       v-bind="this._self"
       name="default"/>
   </components>
@@ -118,6 +118,7 @@ export default {
         vm.runTimes = 0
         vm.actualStartTime = null
         vm.$emit('onStart', vm)
+        vm.$emit('start', vm)
         vm.remainingTime = vm.leftTime
       }
       vm.actualEndTime = vm.endTime || new Date().getTime() + (vm.remainingTime || vm.leftTime)
@@ -132,6 +133,7 @@ export default {
       clearTimeout(vm.countdownTimer)
       vm.remainingTime = vm.leftTime - (new Date().getTime() - vm.actualStartTime)
       vm.$emit('onStop', vm)
+      vm.$emit('stop', vm)
       vm.state = 'stoped'
     },
     switchCountdown() {
@@ -149,6 +151,7 @@ export default {
       vm.timeObj = {}
       vm.usedTime = new Date().getTime() - vm.actualStartTime
       vm.$emit('onFinish', vm)
+      vm.$emit('finish', vm)
     },
     doCountdown() {
       const vm = this
@@ -204,6 +207,7 @@ export default {
         vm.timeObj.org = org
         vm.timeObj.ceil = ceil
         vm.$emit('onProcess', vm)
+        vm.$emit('process', vm)
       } else {
         vm.finishCountdown()
         return

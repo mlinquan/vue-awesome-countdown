@@ -163,10 +163,10 @@ The methods can be accesse through `slot-scop` or `$refs`.
 
 | Event | Explain | Parameters |
 | ------ | ------ | ------ |
-| on-start | Functions executed at the beginning of countdown | `vm` |
-| on-process | Function executed when countdown is performed | `vm` |
-| on-stop | Function executed when countdown stops | `vm` |
-| on-finish | Function executed when countdown finished | `vm` |
+| start | Functions executed at the beginning of countdown | `vm` |
+| process | Function executed when countdown is performed | `vm` |
+| stop | Function executed when countdown stops | `vm` |
+| finish | Function executed when countdown finished | `vm` |
 
 ### MIT License
 

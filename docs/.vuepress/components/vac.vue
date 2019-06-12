@@ -117,7 +117,7 @@ export default {
       if (restart) {
         vm.runTimes = 0
         vm.actualStartTime = null
-        vm.$emit('on-start', vm)
+        vm.$emit('start', vm)
         vm.remainingTime = vm.leftTime
       }
       vm.actualEndTime = vm.endTime || new Date().getTime() + (vm.remainingTime || vm.leftTime)
@@ -131,7 +131,7 @@ export default {
       }
       clearTimeout(vm.countdownTimer)
       vm.remainingTime = vm.leftTime - (new Date().getTime() - vm.actualStartTime)
-      vm.$emit('on-stop', vm)
+      vm.$emit('stop', vm)
       vm.state = 'stoped'
     },
     switchCountdown() {
@@ -148,7 +148,7 @@ export default {
       vm.state = 'finised'
       vm.timeObj = {}
       vm.usedTime = new Date().getTime() - vm.actualStartTime
-      vm.$emit('on-finish', vm)
+      vm.$emit('finish', vm)
     },
     doCountdown() {
       const vm = this
@@ -203,7 +203,7 @@ export default {
         })
         vm.timeObj.org = org
         vm.timeObj.ceil = ceil
-        vm.$emit('on-process', vm)
+        vm.$emit('process', vm)
       } else {
         vm.finishCountdown()
         return

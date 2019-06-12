@@ -10,7 +10,7 @@
     :autoStart="false"
     :left-time="6000"
     @click="sendSMS"
-    @on-finish="(vac) => finish(vac)"
+    @finish="(vac) => finish(vac)"
   >
     <span
       slot="process"
@@ -33,7 +33,7 @@
       :autoStart="false"
       :left-time="60000"
       @click="sendSMS"
-      @on-finish="(vac) => finish(vac)"
+      @finish="(vac) => finish(vac)"
     >
       <span
         slot="process"

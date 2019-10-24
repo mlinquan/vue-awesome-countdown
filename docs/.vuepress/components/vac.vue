@@ -66,7 +66,7 @@ export default {
       default: 'span'
     }
   },
-  data() {
+  data: function () {
     return {
       state: 'beforeStart', //beforeStart, stoped, process, finised
       attrs: {},
@@ -120,7 +120,16 @@ export default {
         vm.$emit('start', vm)
         vm.remainingTime = vm.leftTime
       }
-      vm.actualEndTime = vm.endTime || new Date().getTime() + (vm.remainingTime || vm.leftTime)
+      let remainingTime = 0
+      if(vm.state === 'stoped') {
+        vm.remainingTime = vm.actualEndTime - new Date().getTime()
+      }
+      if(!vm.actualEndTime) {
+        vm.actualEndTime = vm.endTime || new Date().getTime() + (vm.remainingTime || vm.leftTime)
+      }
+      if(vm.state === 'paused') {
+        vm.actualEndTime = new Date().getTime() + vm.remainingTime
+      }
       vm.state = 'process'
       vm.doCountdown()
     },
@@ -130,8 +139,6 @@ export default {
         return
       }
       clearTimeout(vm.countdownTimer)
-      vm.remainingTime = vm.leftTime - (new Date().getTime() - vm.actualStartTime)
-      console.log(vm.remainingTime)
       vm.$emit('stop', vm)
       vm.state = 'stoped'
     },
@@ -141,6 +148,7 @@ export default {
         return
       }
       clearTimeout(vm.countdownTimer)
+      vm.remainingTime = vm.actualEndTime - new Date().getTime()
       vm.$emit('paused', vm)
       vm.state = 'paused'
     },

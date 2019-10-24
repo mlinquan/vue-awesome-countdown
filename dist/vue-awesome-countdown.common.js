@@ -106,12 +106,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"081bbb42-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=template&id=14645d21&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"081bbb42-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=template&id=8725cbfa&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g(_vm._b({tag:"components"},'components',_vm.attrs,false),_vm.$listeners),[_vm._t("prev",null,null,this._self),(_vm.state === 'beforeStart')?_vm._t("before",null,null,this._self):_vm._e(),(_vm.state === 'preheat')?_vm._t("preheat",null,null,this._self):_vm._e(),(_vm.state === 'process' || _vm.state === 'stoped' || _vm.state === 'paused')?_vm._t("process",null,null,this._self):_vm._e(),(_vm.state === 'finised')?_vm._t("finish",null,null,this._self):_vm._e(),_vm._t("default",null,null,this._self)],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/vue-awesome-countdown.vue?vue&type=template&id=14645d21&
+// CONCATENATED MODULE: ./src/vue-awesome-countdown.vue?vue&type=template&id=8725cbfa&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=script&lang=js&
 //
@@ -236,7 +236,16 @@ var staticRenderFns = []
         vm.$emit('start', vm)
         vm.remainingTime = vm.leftTime
       }
-      vm.actualEndTime = vm.endTime || new Date().getTime() + (vm.remainingTime || vm.leftTime)
+      let remainingTime = 0
+      if(vm.state === 'stoped') {
+        vm.remainingTime = vm.actualEndTime - new Date().getTime()
+      }
+      if(!vm.actualEndTime) {
+        vm.actualEndTime = vm.endTime || new Date().getTime() + (vm.remainingTime || vm.leftTime)
+      }
+      if(vm.state === 'paused') {
+        vm.actualEndTime = new Date().getTime() + vm.remainingTime
+      }
       vm.state = 'process'
       vm.doCountdown()
     },
@@ -246,8 +255,6 @@ var staticRenderFns = []
         return
       }
       clearTimeout(vm.countdownTimer)
-      vm.remainingTime = vm.leftTime - (new Date().getTime() - vm.actualStartTime)
-      console.log(vm.remainingTime)
       vm.$emit('stop', vm)
       vm.state = 'stoped'
     },
@@ -257,6 +264,7 @@ var staticRenderFns = []
         return
       }
       clearTimeout(vm.countdownTimer)
+      vm.remainingTime = vm.actualEndTime - new Date().getTime()
       vm.$emit('paused', vm)
       vm.state = 'paused'
     },

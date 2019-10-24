@@ -47,6 +47,7 @@ Vue.use(vueAwesomeCountdown);
 
 ## Usage
 
+Vue2.5.0+.
 ```html
 <countdown :end-time="new Date().getTime() + 60000">
   <span
@@ -62,6 +63,33 @@ Vue.use(vueAwesomeCountdown);
     slot="process"
     slot-scope="{ timeObj }">{{ `Lefttime: ${timeObj.m}:${timeObj.s}` }}</span>
   <span slot="finish">Done!</span>
+</vac>
+```
+
+Vue2.6.0+.
+```html
+<countdown :end-time="new Date().getTime() + 60000">
+  <template
+    v-slot:process="anyYouWantedScopName">
+      <span>{{ `Lefttime: ${anyYouWantedScopName.timeObj.ceil.s}` }}</span>
+    </template>
+  <template
+    v-slot:finish>
+      <span>Done!</span>
+  </template>
+</countdown>
+```
+
+```html
+<vac :end-time="new Date().getTime() + 60000">
+  <template
+    v-slot:process="{ timeObj }">
+    <span>{{ `Lefttime: ${timeObj.m}:${timeObj.s}` }}</span>
+  </template>
+  <template
+    v-slot:finish>
+      <span>Done!</span>
+  </template>
 </vac>
 ```
 

@@ -15,7 +15,7 @@
       v-bind="this._self"
       name="preheat"/>
     <slot 
-      v-if="state === 'process' || state === 'stoped'" 
+      v-if="state === 'process' || state === 'stoped' || state === 'paused'" 
       v-bind="this._self"
       name="process"/>
     <slot 
@@ -111,7 +111,7 @@ export default {
   methods: {
     startCountdown(restart) {
       const vm = this
-      if (vm.state !== 'beforeStart' && vm.state !== 'stoped' && !restart) {
+      if (vm.state !== 'beforeStart' && vm.state !== 'stoped' && vm.state !== 'paused' && !restart) {
         return
       }
       if (restart) {
@@ -131,8 +131,18 @@ export default {
       }
       clearTimeout(vm.countdownTimer)
       vm.remainingTime = vm.leftTime - (new Date().getTime() - vm.actualStartTime)
+      console.log(vm.remainingTime)
       vm.$emit('stop', vm)
       vm.state = 'stoped'
+    },
+    pauseCountdown() {
+      const vm = this
+      if (vm.state !== 'process') {
+        return
+      }
+      clearTimeout(vm.countdownTimer)
+      vm.$emit('paused', vm)
+      vm.state = 'paused'
     },
     switchCountdown() {
       const vm = this

@@ -15,12 +15,17 @@
         @click="() => {
           vac.startCountdown(true)
         }"
-        :disabled="vac.state !== 'finised' || vac.state !== 'stoped'">reStart</button>
+        :disabled="vac.state !== 'finised' && vac.state !== 'stoped'">reStart</button>
+      <button type="button"
+        @click="() => {
+          vac.pauseCountdown()
+        }"
+        :disabled="vac.state !== 'process'">Pause</button>
       <button type="button"
         @click="() => {
           vac.stopCountdown()
         }"
-        :disabled="vac.state === 'stoped' || vac.state === 'beforeStart' || vac.state === 'finised'">Stop</button>
+        :disabled="vac.state !== 'process'">Stop</button>
       <button type="button"
         @click="() => {
           vac.switchCountdown()
@@ -30,7 +35,8 @@
       <button type="button"
         @click="() => {
           vac.finishCountdown()
-        }">Finish</button>
+        }"
+        :disabled="vac.state === 'finised'">Finish</button>
     </div>
     <span
       slot="process"
@@ -53,15 +59,20 @@
       }"
       :disabled="vac.state === 'process' || vac.state === 'finised'">Start</button>
     <button type="button"
-        @click="() => {
-          vac.startCountdown(true)
-        }"
-        :disabled="vac.state !== 'finised' || vac.state !== 'stoped'">reStart</button>
+      @click="() => {
+        vac.startCountdown(true)
+      }"
+      :disabled="vac.state !== 'finised' && vac.state !== 'stoped'">reStart</button>
+    <button type="button"
+      @click="() => {
+        vac.pauseCountdown()
+      }"
+      :disabled="vac.state !== 'process'">Pause</button>
     <button type="button"
       @click="() => {
         vac.stopCountdown()
       }"
-      :disabled="vac.state === 'stoped' || vac.state === 'beforeStart' || vac.state === 'finised'">Stop</button>
+      :disabled="vac.state !== 'process'">Stop</button>
     <button type="button"
       @click="() => {
         vac.switchCountdown()
@@ -71,7 +82,8 @@
     <button type="button"
       @click="() => {
         vac.finishCountdown()
-      }">Finish</button>
+      }"
+      :disabled="vac.state === 'finised'">Finish</button>
   </div>
   <span
     slot="process"

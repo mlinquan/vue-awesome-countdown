@@ -66,7 +66,7 @@ export default {
       default: 'span'
     }
   },
-  data() {
+  data: function () {
     return {
       state: 'beforeStart', //beforeStart, stoped, process, finised
       attrs: {},

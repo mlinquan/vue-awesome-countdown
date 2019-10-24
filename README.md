@@ -98,7 +98,7 @@ The data can get it through `slot-scop` or `methods`.
 
 | Data | Explain | Default |
 | ------ | ------ | ------ |
-| state | The countdown run state, the states are `beforeStart`, `stoped`, `process` and `finised` | `beforeStart` |
+| state | The countdown run state, the states are `beforeStart`, `stoped`, `paused`, `process` and `finised` | `beforeStart` |
 | attrs | The countdown component tag attributes | `{}` |
 | actualEndTime | Actual countdown end time | `null` |
 | timeObj | <a href="#timeobj">Look look</a> |  `{}` |
@@ -143,7 +143,7 @@ Slot `process` and slot `finish` will not display at the same time.
 | ------ | ------ | ------ | ------ |
 | prev | component `_self` | 1 | Defined, Controllable display |
 | before | component `_self` | 2 | On before start, `state === 'beforeStart'` |
-| process | component `_self` | 2 | On process,  `state === 'process'` |
+| process | component `_self` | 2 | On process,  `state === 'process'` or `state === 'stoped'` or `state === 'paused'` |
 | finish | component `_self` | 3 | On finish,  `state === 'finished'` |
 | default | component `_self` | 3 | Defined, Controllable display |
 
@@ -155,6 +155,7 @@ The methods can be accesse through `slot-scop` or `$refs`.
 | ------ | ------ | ------ |
 | startCountdown | | `restart` |
 | stopCountdown | | no |
+| pauseCountdown | | no |
 | switchCountdown | | no |
 | finishCountdown | | no |
 | doCountdown | | no |
@@ -166,6 +167,7 @@ The methods can be accesse through `slot-scop` or `$refs`.
 | start | Functions executed at the beginning of countdown | `vm` |
 | process | Function executed when countdown is performed | `vm` |
 | stop | Function executed when countdown stops | `vm` |
+| pause | Function executed when countdown paused | `vm` |
 | finish | Function executed when countdown finished | `vm` |
 
 ### MIT License

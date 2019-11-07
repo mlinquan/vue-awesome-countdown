@@ -1,6 +1,6 @@
 {
   "name": "vue-awesome-countdown",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Vue countdown plugin.",
   "main": "dist/vue-awesome-countdown.common.js",
   "unpkg": "dist/vue-awesome-countdown.umd.min.js",

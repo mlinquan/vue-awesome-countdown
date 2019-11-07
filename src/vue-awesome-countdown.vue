@@ -115,17 +115,15 @@ export default {
         return
       }
       if (restart) {
-        vm.runTimes = 0
-        vm.actualStartTime = null
+        Object.assign(vm.$data, vm.$options.data.call(vm))
         vm.$emit('start', vm)
-        vm.remainingTime = vm.leftTime
       }
       let remainingTime = 0
       if(vm.state === 'stoped') {
         vm.remainingTime = vm.actualEndTime - new Date().getTime()
       }
       if(!vm.actualEndTime) {
-        vm.actualEndTime = vm.endTime || new Date().getTime() + (vm.remainingTime || vm.leftTime)
+        vm.actualEndTime = vm.endTime || (new Date().getTime() + (vm.remainingTime || vm.leftTime))
       }
       if(vm.state === 'paused') {
         vm.actualEndTime = new Date().getTime() + vm.remainingTime

@@ -1,6 +1,6 @@
 {
   "name": "vue-awesome-countdown",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "Vue countdown plugin.",
   "main": "dist/vue-awesome-countdown.common.js",
   "unpkg": "dist/vue-awesome-countdown.umd.min.js",
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/mlinquan/vue-awesome-countdown#readme",
   "dependencies": {
-    "@vue/cli-service": "^3.2.0",
+    "@vue/cli-service": "^4.2.3",
     "vue-template-compiler": "^2.6.10"
   }
 }

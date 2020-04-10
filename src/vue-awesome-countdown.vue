@@ -15,11 +15,11 @@
       v-bind="this._self"
       name="preheat"/>
     <slot 
-      v-if="state === 'process' || state === 'stoped' || state === 'paused'" 
+      v-if="state === 'process' || state === 'stopped' || state === 'paused'" 
       v-bind="this._self"
       name="process"/>
     <slot 
-      v-if="state === 'finised'" 
+      v-if="state === 'finished'" 
       v-bind="this._self"
       name="finish"/>
     <slot 
@@ -68,7 +68,7 @@ export default {
   },
   data: function () {
     return {
-      state: 'beforeStart', //beforeStart, stoped, process, finised
+      state: 'beforeStart', //beforeStart, stopped, process, finished
       attrs: {},
       actualStartTime: null,
       actualEndTime: null,
@@ -111,7 +111,7 @@ export default {
   methods: {
     startCountdown(restart) {
       const vm = this
-      if (vm.state !== 'beforeStart' && vm.state !== 'stoped' && vm.state !== 'paused' && !restart) {
+      if (vm.state !== 'beforeStart' && vm.state !== 'stopped' && vm.state !== 'paused' && !restart) {
         return
       }
       if (restart) {
@@ -119,7 +119,7 @@ export default {
         vm.$emit('start', vm)
       }
       let remainingTime = 0
-      if(vm.state === 'stoped') {
+      if(vm.state === 'stopped') {
         vm.remainingTime = vm.actualEndTime - new Date().getTime()
       }
       if(!vm.actualEndTime) {
@@ -138,7 +138,7 @@ export default {
       }
       clearTimeout(vm.countdownTimer)
       vm.$emit('stop', vm)
-      vm.state = 'stoped'
+      vm.state = 'stopped'
     },
     pauseCountdown() {
       const vm = this
@@ -152,7 +152,7 @@ export default {
     },
     switchCountdown() {
       const vm = this
-      if (vm.state === 'stoped' || vm.state === 'beforeStart') {
+      if (vm.state === 'stopped' || vm.state === 'beforeStart') {
         return vm.startCountdown()
       }
       if (vm.state === 'process') {
@@ -161,7 +161,7 @@ export default {
     },
     finishCountdown() {
       const vm = this
-      vm.state = 'finised'
+      vm.state = 'finished'
       vm.timeObj = {}
       vm.usedTime = new Date().getTime() - vm.actualStartTime
       vm.$emit('finish', vm)

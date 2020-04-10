@@ -10,12 +10,12 @@
         @click="() => {
           vac.startCountdown()
         }"
-        :disabled="vac.state === 'process' || vac.state === 'finised'">Start</button>
+        :disabled="vac.state === 'process' || vac.state === 'finished'">Start</button>
       <button type="button"
         @click="() => {
           vac.startCountdown(true)
         }"
-        :disabled="vac.state !== 'finised' && vac.state !== 'stoped'">reStart</button>
+        :disabled="vac.state !== 'finished' && vac.state !== 'stopped'">reStart</button>
       <button type="button"
         @click="() => {
           vac.pauseCountdown()
@@ -30,13 +30,13 @@
         @click="() => {
           vac.switchCountdown()
         }"
-        :disabled="vac.state === 'finised'"
-        >Switch - {{ vac.state === 'stoped' ? 'Start' : 'Stop' }}</button>
+        :disabled="vac.state === 'finished'"
+        >Switch - {{ vac.state === 'stopped' ? 'Start' : 'Stop' }}</button>
       <button type="button"
         @click="() => {
           vac.finishCountdown()
         }"
-        :disabled="vac.state === 'finised'">Finish</button>
+        :disabled="vac.state === 'finished'">Finish</button>
     </div>
     <span
       slot="process"
@@ -57,12 +57,12 @@
       @click="() => {
         vac.startCountdown()
       }"
-      :disabled="vac.state === 'process' || vac.state === 'finised'">Start</button>
+      :disabled="vac.state === 'process' || vac.state === 'finished'">Start</button>
     <button type="button"
       @click="() => {
         vac.startCountdown(true)
       }"
-      :disabled="vac.state !== 'finised' && vac.state !== 'stoped'">reStart</button>
+      :disabled="vac.state !== 'finished' && vac.state !== 'stopped'">reStart</button>
     <button type="button"
       @click="() => {
         vac.pauseCountdown()
@@ -77,13 +77,13 @@
       @click="() => {
         vac.switchCountdown()
       }"
-      :disabled="vac.state === 'finised'"
-      >Switch - {{ vac.state === 'stoped' ? 'Start' : 'Stop' }}</button>
+      :disabled="vac.state === 'finished'"
+      >Switch - {{ vac.state === 'stopped' ? 'Start' : 'Stop' }}</button>
     <button type="button"
       @click="() => {
         vac.finishCountdown()
       }"
-      :disabled="vac.state === 'finised'">Finish</button>
+      :disabled="vac.state === 'finished'">Finish</button>
   </div>
   <span
     slot="process"

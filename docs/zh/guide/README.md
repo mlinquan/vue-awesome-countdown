@@ -126,7 +126,7 @@ The data can get it through `slot-scop` or `methods`.
 
 | Data | Explain | Default |
 | ------ | ------ | ------ |
-| state | The countdown run state, the states are `beforeStart`, `stoped`, `paused`, `process` and `finised` | `beforeStart` |
+| state | The countdown run state, the states are `beforeStart`, `stopped`, `paused`, `process` and `finished` | `beforeStart` |
 | attrs | The countdown component tag attributes | `{}` |
 | actualEndTime | Actual countdown end time | `null` |
 | timeObj | <a href="#timeobj">Look look</a> |  `{}` |
@@ -171,7 +171,7 @@ Slot `process` and slot `finish` will not display at the same time.
 | ------ | ------ | ------ | ------ |
 | prev | component `_self` | 1 | Defined, Controllable display |
 | before | component `_self` | 2 | On before start, `state === 'beforeStart'` |
-| process | component `_self` | 2 | On process,  `state === 'process'` or `state === 'stoped'` or `state === 'paused'` |
+| process | component `_self` | 2 | On process,  `state === 'process'` or `state === 'stopped'` or `state === 'paused'` |
 | finish | component `_self` | 3 | On finish,  `state === 'finished'` |
 | default | component `_self` | 3 | Defined, Controllable display |
 

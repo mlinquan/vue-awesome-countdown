@@ -10,7 +10,7 @@
       }"
       slot="prev"
       slot-scope="vac"
-    >Switch - {{ vac.state === 'stoped' ? 'Start' : 'Stop' }}</button>
+    >Switch - {{ vac.state === 'stopped' ? 'Start' : 'Stop' }}</button>
     <span
       slot="process"
       slot-scope="{ timeObj, state }">
@@ -42,7 +42,7 @@
     }"
     slot="prev"
     slot-scope="vac"
-  >Switch - {{ vac.state === 'stoped' ? 'Start' : 'Stop' }}</button>
+  >Switch - {{ vac.state === 'stopped' ? 'Start' : 'Stop' }}</button>
   <span
     slot="process"
     slot-scope="{ timeObj, state }">
@@ -77,7 +77,7 @@ export default {
       const vm = this
       vm.$refs.vac2.switchCountdown()
       vm.$nextTick(() => {
-        vm.btnTxt = vm.$refs.vac2.state === 'stoped' ? 'Start' : 'Stop'
+        vm.btnTxt = vm.$refs.vac2.state === 'stopped' ? 'Start' : 'Stop'
       })
     }
   }
@@ -97,7 +97,7 @@ export default {
       const vm = this
       vm.$refs.vac2.switchCountdown()
       vm.$nextTick(() => {
-        vm.btnTxt = vm.$refs.vac2.state === 'stoped' ? 'Start' : 'Stop'
+        vm.btnTxt = vm.$refs.vac2.state === 'stopped' ? 'Start' : 'Stop'
       })
     }
   }

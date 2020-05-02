@@ -118,7 +118,7 @@ export default {
         Object.assign(vm.$data, vm.$options.data.call(vm))
         vm.$emit('start', vm)
       }
-      let remainingTime = 0
+      vm.remainingTime = 0
       if(vm.state === 'stopped') {
         vm.remainingTime = vm.actualEndTime - new Date().getTime()
       }

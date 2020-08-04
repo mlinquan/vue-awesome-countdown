@@ -186,6 +186,11 @@ export default {
           ms: leftTime % 1000
         }
 
+        if(vm.speed === 1000 && org.ms >= 995) {
+          org.s++
+          org.ms = 0
+        }
+
         const txt = {
           d: parseInt(org.d, 10).toString(),
           h: parseInt(org.h, 10)

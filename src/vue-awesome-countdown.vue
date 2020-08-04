@@ -66,6 +66,11 @@ export default {
       default: 'span'
     }
   },
+  computed: {
+    thousandSpeed() {
+      return this.speed > 0 && this.speed % 1000 === 0
+    }
+  },
   data: function () {
     return {
       state: 'beforeStart', //beforeStart, stopped, process, finished
@@ -186,7 +191,7 @@ export default {
           ms: leftTime % 1000
         }
 
-        if(vm.speed === 1000 && org.ms >= 995) {
+        if(vm.thousandSpeed && org.ms >= 995) {
           org.s++
           org.ms = 0
         }

@@ -9,6 +9,6 @@ module.exports = [
   },
   {
     text: 'Changelog',
-    link: 'https://github.com/mlinquan/vue-awesome-countdown/master/CHANGELOG.md'
+    link: 'https://github.com/mlinquan/vue-awesome-countdown/blob/master/CHANGELOG.md'
   }
 ]

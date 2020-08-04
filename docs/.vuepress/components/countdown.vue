@@ -1,33 +1,13 @@
 <template>
-  <components 
-    :is="tag" 
-    v-bind="attrs"
-    v-on="$listeners">
-    <slot 
-      v-bind="this._self"
-      name="prev"/>
-    <slot 
-      v-if="state === 'beforeStart'"
-      v-bind="this._self"
-      name="before"/>
-    <slot 
-      v-if="state === 'preheat'"
-      v-bind="this._self"
-      name="preheat"/>
-    <slot 
-      v-if="state === 'process' || state === 'stopped' || state === 'paused'" 
-      v-bind="this._self"
-      name="process"/>
-    <slot 
-      v-if="state === 'finished'" 
-      v-bind="this._self"
-      name="finish"/>
-    <slot 
-      v-bind="this._self"
-      name="default"/>
+  <components :is="tag" v-bind="attrs" v-on="$listeners">
+    <slot v-bind="this._self" name="prev" />
+    <slot v-if="state === 'beforeStart'" v-bind="this._self" name="before" />
+    <slot v-if="state === 'preheat'" v-bind="this._self" name="preheat" />
+    <slot v-if="state === 'process' || state === 'stopped' || state === 'paused'" v-bind="this._self" name="process" />
+    <slot v-if="state === 'finished'" v-bind="this._self" name="finish" />
+    <slot v-bind="this._self" name="default" />
   </components>
 </template>
-
 <script>
 export default {
   name: 'vue-awesome-countdown',
@@ -71,7 +51,7 @@ export default {
       return this.speed > 0 && this.speed % 1000 === 0
     }
   },
-  data: function () {
+  data: function() {
     return {
       state: 'beforeStart', //beforeStart, stopped, process, finished
       attrs: {},
@@ -123,13 +103,13 @@ export default {
         Object.assign(vm.$data, vm.$options.data.call(vm))
         vm.$emit('start', vm)
       }
-      if(vm.state === 'stopped') {
+      if (vm.state === 'stopped') {
         vm.remainingTime = vm.actualEndTime - new Date().getTime()
       }
-      if(!vm.actualEndTime) {
+      if (!vm.actualEndTime) {
         vm.actualEndTime = vm.endTime || (new Date().getTime() + (vm.remainingTime || vm.leftTime))
       }
-      if(vm.state === 'paused') {
+      if (vm.state === 'paused') {
         vm.actualEndTime = new Date().getTime() + vm.remainingTime
       }
       vm.state = 'process'
@@ -185,7 +165,7 @@ export default {
 
         let ms = leftTime % 1000
 
-        if(vm.thousandSpeed && ms > 990) {
+        if (vm.thousandSpeed && ms > 990) {
           leftSeconds = Math.ceil(leftSeconds)
           ms = 0
         }
@@ -242,7 +222,7 @@ export default {
       if (nextSpeed < 0) {
         nextSpeed = nextSpeed + vm.speed
       }
-      if(leftTime < vm.speed) {
+      if (leftTime < vm.speed) {
         nextSpeed = leftTime
       }
       vm.countdownTimer = setTimeout(vm.doCountdown, nextSpeed)

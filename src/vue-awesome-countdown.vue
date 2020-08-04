@@ -185,7 +185,7 @@ export default {
 
         let ms = leftTime % 1000
 
-        if(vm.thousandSpeed && ms >= 995) {
+        if(vm.thousandSpeed && ms > 990) {
           leftSeconds = Math.ceil(leftSeconds)
           ms = 0
         }
@@ -241,6 +241,9 @@ export default {
         (vm.actualStartTime + vm.runTimes++ * vm.speed - new Date().getTime())
       if (nextSpeed < 0) {
         nextSpeed = nextSpeed + vm.speed
+      }
+      if(leftTime < vm.speed) {
+        nextSpeed = leftTime
       }
       vm.countdownTimer = setTimeout(vm.doCountdown, nextSpeed)
     }

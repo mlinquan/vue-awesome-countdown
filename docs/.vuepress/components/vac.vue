@@ -66,6 +66,11 @@ export default {
       default: 'span'
     }
   },
+  computed: {
+    thousandSpeed() {
+      return this.speed > 0 && this.speed % 1000 === 0
+    }
+  },
   data: function () {
     return {
       state: 'beforeStart', //beforeStart, stopped, process, finished
@@ -176,14 +181,21 @@ export default {
       let leftTime = new Date(vm.actualEndTime).getTime() - new Date().getTime()
       if (leftTime > 0) {
         const t = {}
-        const leftSeconds = leftTime / 1000
+        let leftSeconds = leftTime / 1000
+
+        let ms = leftTime % 1000
+
+        if(vm.thousandSpeed && ms > 990) {
+          leftSeconds = Math.ceil(leftSeconds)
+          ms = 0
+        }
 
         const org = {
           d: leftSeconds / 60 / 60 / 24,
           h: (leftSeconds / 60 / 60) % 24,
           m: (leftSeconds / 60) % 60,
           s: leftSeconds % 60,
-          ms: leftTime % 1000
+          ms: ms
         }
 
         const txt = {
@@ -229,6 +241,9 @@ export default {
         (vm.actualStartTime + vm.runTimes++ * vm.speed - new Date().getTime())
       if (nextSpeed < 0) {
         nextSpeed = nextSpeed + vm.speed
+      }
+      if(leftTime < vm.speed) {
+        nextSpeed = leftTime
       }
       vm.countdownTimer = setTimeout(vm.doCountdown, nextSpeed)
     }

@@ -203,12 +203,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/_cache-loader@4.1.0@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"883de7d0-vue-loader-template"}!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@4.1.0@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=template&id=6c9a80cd&
+// CONCATENATED MODULE: ./node_modules/_cache-loader@4.1.0@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"883de7d0-vue-loader-template"}!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@4.1.0@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=template&id=9d53307c&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g(_vm._b({tag:"components"},'components',_vm.attrs,false),_vm.$listeners),[_vm._t("prev",null,null,this._self),(_vm.state === 'beforeStart')?_vm._t("before",null,null,this._self):_vm._e(),(_vm.state === 'preheat')?_vm._t("preheat",null,null,this._self):_vm._e(),(_vm.state === 'process' || _vm.state === 'stopped' || _vm.state === 'paused')?_vm._t("process",null,null,this._self):_vm._e(),(_vm.state === 'finished')?_vm._t("finish",null,null,this._self):_vm._e(),_vm._t("default",null,null,this._self)],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/vue-awesome-countdown.vue?vue&type=template&id=6c9a80cd&
+// CONCATENATED MODULE: ./src/vue-awesome-countdown.vue?vue&type=template&id=9d53307c&
 
 // CONCATENATED MODULE: ./node_modules/_cache-loader@4.1.0@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/vue-awesome-countdown.vue?vue&type=script&lang=js&
 //
@@ -398,7 +398,7 @@ var staticRenderFns = []
 
         let ms = leftTime % 1000
 
-        if(vm.thousandSpeed && ms >= 995) {
+        if(vm.thousandSpeed && ms > 990) {
           leftSeconds = Math.ceil(leftSeconds)
           ms = 0
         }
@@ -454,6 +454,9 @@ var staticRenderFns = []
         (vm.actualStartTime + vm.runTimes++ * vm.speed - new Date().getTime())
       if (nextSpeed < 0) {
         nextSpeed = nextSpeed + vm.speed
+      }
+      if(leftTime < vm.speed) {
+        nextSpeed = leftTime
       }
       vm.countdownTimer = setTimeout(vm.doCountdown, nextSpeed)
     }

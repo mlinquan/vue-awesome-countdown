@@ -1,6 +1,6 @@
 {
   "name": "vue-awesome-countdown",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "Vue countdown plugin.",
   "main": "dist/vue-awesome-countdown.common.js",
   "unpkg": "dist/vue-awesome-countdown.umd.min.js",
@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "build": "vue-cli-service build --target lib --name vue-awesome-countdown src/vue-awesome-countdown.js",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",

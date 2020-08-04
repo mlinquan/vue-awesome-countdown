@@ -181,19 +181,21 @@ export default {
       let leftTime = new Date(vm.actualEndTime).getTime() - new Date().getTime()
       if (leftTime > 0) {
         const t = {}
-        const leftSeconds = leftTime / 1000
+        let leftSeconds = leftTime / 1000
+
+        let ms = leftTime % 1000
+
+        if(vm.thousandSpeed && ms >= 995) {
+          leftSeconds = Math.ceil(leftSeconds)
+          ms = 0
+        }
 
         const org = {
           d: leftSeconds / 60 / 60 / 24,
           h: (leftSeconds / 60 / 60) % 24,
           m: (leftSeconds / 60) % 60,
           s: leftSeconds % 60,
-          ms: leftTime % 1000
-        }
-
-        if(vm.thousandSpeed && org.ms >= 995) {
-          org.s++
-          org.ms = 0
+          ms: ms
         }
 
         const txt = {

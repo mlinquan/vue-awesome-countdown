@@ -4,9 +4,9 @@
 <ClientOnly>
   <p>example1: </p>
   <button type="button" @click="() => {
-    this.$refs.vac1.startCountdown(true)
+    this.$refs.vac1.startCountdown()
   }">Start</button>
-  <vac :end-time="new Date().getTime() + 10000" :auto-start="false" ref="vac1">
+  <vac :left-time="10000" :auto-start="false" ref="vac1">
     <span
       slot="process"
       slot-scope="{ timeObj }">
@@ -16,7 +16,7 @@
   </vac>
   <p>example2: </p>
   <button type="button" @click="startCountdown">Start</button>
-  <vac :end-time="new Date().getTime() + 10000" :auto-start="false" ref="vac2">
+  <vac :left-time="10000" :auto-start="false" ref="vac2" @start="start">
     <span
       slot="process"
       slot-scope="{ timeObj }">
@@ -32,7 +32,7 @@
 <button type="button" @click="() => {
   this.$refs.vac.startCountdown(true)
 }">
-<vac :end-time="new Date().getTime() + 10000" :auto-start="false" ref="vac1">
+<vac :left-time="10000" :auto-start="false" ref="vac1">
   <span
     slot="process"
     slot-scope="{ timeObj }">
@@ -45,7 +45,7 @@
 ``` vue
 <p>example2: </p>
 <button type="button" @click="startCountdown">
-<vac :end-time="new Date().getTime() + 10000" :auto-start="false" ref="vac2">
+<vac :left-time="10000" :auto-start="false" ref="vac2" @start="start">
   <span
     slot="process"
     slot-scope="{ timeObj }">
@@ -62,6 +62,9 @@ export default {
     startCountdown() {
       const vm = this
       vm.$refs.vac2.startCountdown(true)
+    },
+    start() {
+      console.log('start')
     }
   }
 }
@@ -76,7 +79,10 @@ export default {
   methods: {
     startCountdown() {
       const vm = this
-      vm.$refs.vac2.startCountdown(true)
+      vm.$refs.vac2.startCountdown()
+    },
+    start() {
+      console.log('start')
     }
   }
 }

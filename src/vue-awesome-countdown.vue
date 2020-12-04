@@ -101,7 +101,6 @@ export default {
       }
       if (restart) {
         Object.assign(vm.$data, vm.$options.data.call(vm))
-        vm.$emit('start', vm)
       }
       if (vm.state === 'stopped') {
         vm.remainingTime = vm.actualEndTime - new Date().getTime()
@@ -112,6 +111,7 @@ export default {
       if (vm.state === 'paused') {
         vm.actualEndTime = new Date().getTime() + vm.remainingTime
       }
+      vm.$emit('start', vm)
       vm.state = 'process'
       vm.doCountdown()
     },

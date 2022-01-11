@@ -34,7 +34,7 @@ module.exports = {
         nav: require('./nav/en'),
         sidebar: {
           '/guide/': getGuideSidebar('Guide'),
-          '/examples/': getExamplesSidebar('Examples', 'Mehtods')
+          '/examples/': getExamplesSidebar('Examples', 'Methods')
         }
       },
       '/zh/': {

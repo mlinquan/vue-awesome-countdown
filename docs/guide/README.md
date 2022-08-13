@@ -133,7 +133,7 @@ The data can get it through `slot-scop` or `methods`.
 | countdownTimer | The countdown timer function, Do not use as much as possible. |`null` |
 | actualStartTime | Actual countdown start time. | `null` |
 | runTimes | Countdown run times (The `onProcess` methods run times) | `0` |
-| usedTime | The total time consuming from the countdown to the end. | `0` |
+| usedTime | The total time consumed from the countdown start to the end. | `0` |
 
 ## timeObj
 
@@ -177,7 +177,7 @@ Slot `process` and slot `finish` will not display at the same time.
 
 ## Methods
 
-The methods can be accesse through `slot-scop` or `$refs`.
+The methods can be accessed through `slot-scop` or `$refs`.
 
 | Method | Explain | Parameters |
 | ------ | ------ | ------ |

@@ -37,7 +37,7 @@ footer: MIT Licensed | Copyright © 2018-present Lin Quan | Powered by Vuepress
       </span>
       <span slot="finish">Done!</span>
   </countdown>
-</h1>
+</h1> 
 ```
 
 ::: warning COMPATIBILITY NOTE

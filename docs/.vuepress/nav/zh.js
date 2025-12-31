@@ -8,7 +8,7 @@ module.exports = [
     link: '/zh/examples/'
   },
   {
-    text: 'Changelog',
+    text: '更新日志',
     link: 'https://github.com/mlinquan/vue-awesome-countdown/blob/master/CHANGELOG.md'
   }
 ]

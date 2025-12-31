@@ -42,5 +42,6 @@ footer: MIT Licensed | Copyright © 2018-present Lin Quan | 自豪地采用Vuepr
 
 ::: warning 注意
 请确保你的 Node.js 版本 >= 8，<br>
-Vue.js 版本 >= 2.5.0。
+Vue.js 版本 >= 2.5.0 或 Vue 3，<br>
+支持 TypeScript。
 :::

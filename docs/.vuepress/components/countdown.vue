@@ -1,13 +1,14 @@
 <template>
-  <components :is="tag" v-bind="attrs" v-on="$listeners">
+  <component :is="tag" v-bind="attrs" v-on="$listeners">
     <slot v-bind="this._self" name="prev" />
     <slot v-if="state === 'beforeStart'" v-bind="this._self" name="before" />
     <slot v-if="state === 'preheat'" v-bind="this._self" name="preheat" />
     <slot v-if="state === 'process' || state === 'stopped' || state === 'paused'" v-bind="this._self" name="process" />
     <slot v-if="state === 'finished'" v-bind="this._self" name="finish" />
     <slot v-bind="this._self" name="default" />
-  </components>
+  </component>
 </template>
+
 <script>
 export default {
   name: 'vue-awesome-countdown',
@@ -15,14 +16,14 @@ export default {
     startTime: {
       type: [String, Number, Date],
       default: null,
-      validator: function(value) {
+      validator: function (value) {
         return new Date(value).toString() !== 'Invalid Date'
       }
     },
     endTime: {
       type: [String, Number, Date],
       default: null,
-      validator: function(value) {
+      validator: function (value) {
         return new Date(value).toString() !== 'Invalid Date'
       }
     },
@@ -37,7 +38,7 @@ export default {
     speed: {
       type: Number,
       default: 1000,
-      validator: function(value) {
+      validator: function (value) {
         return value >= 0
       }
     },
@@ -51,9 +52,9 @@ export default {
       return this.speed > 0 && this.speed % 1000 === 0
     }
   },
-  data: function() {
+  data: function () {
     return {
-      state: 'beforeStart', //beforeStart, stopped, process, finished
+      state: 'beforeStart', // beforeStart, stopped, process, finished
       attrs: {},
       actualStartTime: null,
       actualEndTime: null,
@@ -72,7 +73,7 @@ export default {
       }
       if (curSpeed !== oldSpeed) {
         clearTimeout(vm.countdownTimer)
-        const now = new Date().getTime()
+        const now = Date.now()
         const runTimes = Math.floor((now - vm.actualStartTime) / curSpeed)
         const nextTime = now % curSpeed
         vm.runTimes = runTimes
@@ -85,12 +86,18 @@ export default {
   created() {
     const vm = this
     const startTime = (vm.startTime && new Date(vm.startTime).getTime()) || 0
-    const firstTime = (startTime && startTime - new Date().getTime()) || 0
+    const firstTime = (startTime && startTime - Date.now()) || 0
     if (vm.autoStart) {
       vm.state = 'preheat'
       setTimeout(() => {
         vm.startCountdown(true)
       }, firstTime)
+    }
+  },
+  beforeDestroy() {
+    // 清理定时器，防止内存泄漏
+    if (this.countdownTimer) {
+      clearTimeout(this.countdownTimer)
     }
   },
   methods: {
@@ -103,13 +110,13 @@ export default {
         Object.assign(vm.$data, vm.$options.data.call(vm))
       }
       if (vm.state === 'stopped') {
-        vm.remainingTime = vm.actualEndTime - new Date().getTime()
+        vm.remainingTime = vm.actualEndTime - Date.now()
       }
       if (!vm.actualEndTime) {
-        vm.actualEndTime = vm.endTime || (new Date().getTime() + (vm.remainingTime || vm.leftTime))
+        vm.actualEndTime = vm.endTime || (Date.now() + (vm.remainingTime || vm.leftTime))
       }
       if (vm.state === 'paused') {
-        vm.actualEndTime = new Date().getTime() + vm.remainingTime
+        vm.actualEndTime = Date.now() + vm.remainingTime
       }
       vm.$emit('start', vm)
       vm.state = 'process'
@@ -130,7 +137,7 @@ export default {
         return
       }
       clearTimeout(vm.countdownTimer)
-      vm.remainingTime = vm.actualEndTime - new Date().getTime()
+      vm.remainingTime = vm.actualEndTime - Date.now()
       vm.$emit('paused', vm)
       vm.state = 'paused'
     },
@@ -147,7 +154,7 @@ export default {
       const vm = this
       vm.state = 'finished'
       vm.timeObj = {}
-      vm.usedTime = new Date().getTime() - vm.actualStartTime
+      vm.usedTime = Date.now() - vm.actualStartTime
       vm.$emit('finish', vm)
     },
     doCountdown() {
@@ -156,13 +163,12 @@ export default {
         return
       }
       if (!vm.actualStartTime) {
-        vm.actualStartTime = new Date().getTime()
+        vm.actualStartTime = Date.now()
       }
-      let leftTime = new Date(vm.actualEndTime).getTime() - new Date().getTime()
+      let leftTime = new Date(vm.actualEndTime).getTime() - Date.now()
       if (leftTime > 0) {
         const t = {}
         let leftSeconds = leftTime / 1000
-
         let ms = leftTime % 1000
 
         if (vm.thousandSpeed && ms > 990) {
@@ -180,16 +186,10 @@ export default {
 
         const txt = {
           d: parseInt(org.d, 10).toString(),
-          h: parseInt(org.h, 10)
-            .toString()
-            .padStart(2, 0),
-          m: parseInt(org.m, 10)
-            .toString()
-            .padStart(2, 0),
-          s: parseInt(org.s, 10)
-            .toString()
-            .padStart(2, 0),
-          ms: org.ms.toString().padStart(3, 0)
+          h: parseInt(org.h, 10).toString().padStart(2, '0'),
+          m: parseInt(org.m, 10).toString().padStart(2, '0'),
+          s: parseInt(org.s, 10).toString().padStart(2, '0'),
+          ms: org.ms.toString().padStart(3, '0')
         }
 
         const ceil = {
@@ -201,24 +201,20 @@ export default {
 
         t.endTime = vm.actualEndTime
         t.speed = vm.speed
-        vm.usedTime = new Date().getTime() - vm.actualStartTime
+        vm.usedTime = Date.now() - vm.actualStartTime
         t.leftTime = leftTime
         vm.remainingTime = leftTime
         vm.timeObj = Object.assign({}, t, txt, {
           org,
           ceil
         })
-        vm.timeObj.org = org
-        vm.timeObj.ceil = ceil
         vm.$emit('process', vm)
       } else {
         vm.finishCountdown()
         return
       }
 
-      let nextSpeed =
-        vm.speed +
-        (vm.actualStartTime + vm.runTimes++ * vm.speed - new Date().getTime())
+      let nextSpeed = vm.speed + (vm.actualStartTime + vm.runTimes++ * vm.speed - Date.now())
       if (nextSpeed < 0) {
         nextSpeed = nextSpeed + vm.speed
       }

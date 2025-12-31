@@ -11,13 +11,14 @@ cache:
 
 # S: Build Lifecycle
 install:
-  - yarn global add vuepress
+  - npm install pnpm -g
+  - pnpm add vuepress -D
 
 # build
 script:
   - cp -rf src/vue-awesome-countdown.vue docs/.vuepress/components/vac.vue
   - cp -rf src/vue-awesome-countdown.vue docs/.vuepress/components/countdown.vue
-  - vuepress build docs
+  - pnpm run docs:build
 
 after_script:
   - cd vuepress

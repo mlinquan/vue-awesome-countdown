@@ -42,5 +42,6 @@ footer: MIT Licensed | Copyright © 2018-present Lin Quan | Powered by Vuepress
 
 ::: warning COMPATIBILITY NOTE
 vue-awesome-countdown requires Node.js >= 8, <br>
-Vue.js >= 2.5.0.
+Vue.js >= 2.5.0 or Vue 3, <br>
+TypeScript is supported.
 :::

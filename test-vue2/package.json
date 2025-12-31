@@ -1,0 +1,17 @@
+{
+  "name": "test-vue2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "vue": "^2.7.16",
+    "vue-awesome-countdown": "file:.."
+  }
+}

@@ -8,12 +8,12 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'VAC (vue-awesome-countdown)',
-      description: 'Countdown plug-in with high performance and high accuracy for Vue 2.5.0+.'
+      description: 'Countdown plug-in with high performance and high accuracy for Vue 2.5.0+ and Vue 3, with TypeScript support.'
     },
     '/zh/': {
       lang: 'zh-CN',
       title: 'VAC (vue-awesome-countdown)',
-      description: '适用于Vue 2.5.0+的高性能高精度倒计时插件。'
+      description: '适用于Vue 2.5.0+和Vue 3的高性能高精度倒计时插件，支持TypeScript。'
     }
   },
   themeConfig: {

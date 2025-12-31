@@ -4,7 +4,7 @@
 [![Monthly Downloads](https://img.shields.io/npm/dm/vue-awesome-countdown.svg)](https://www.npmjs.com/package/vue-awesome-countdown)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Countdown plug-in with high performance and high accuracy for [Vue](http://vuejs.org/)2.5.0+.
+Countdown plug-in with high performance and high accuracy for [Vue](http://vuejs.org/) 2.5.0+ and Vue 3, with TypeScript support.
 
 ## Installation
 
@@ -47,7 +47,9 @@ Vue.use(vueAwesomeCountdown);
 
 ## Usage
 
-Vue2.5.0+.
+### Vue 2
+
+Vue 2.5.0+ with slot-scope:
 ```html
 <countdown :end-time="new Date().getTime() + 60000">
   <span
@@ -66,7 +68,7 @@ Vue2.5.0+.
 </vac>
 ```
 
-Vue2.6.0+.
+Vue 2.6.0+ with v-slot:
 ```html
 <countdown :end-time="new Date().getTime() + 60000">
   <template
@@ -80,17 +82,42 @@ Vue2.6.0+.
 </countdown>
 ```
 
+### Vue 3
+
+Vue 3 with v-slot:
 ```html
-<vac :end-time="new Date().getTime() + 60000">
-  <template
-    v-slot:process="{ timeObj }">
+<countdown :end-time="Date.now() + 60000">
+  <template v-slot:process="{ timeObj }">
     <span>{{ `Lefttime: ${timeObj.m}:${timeObj.s}` }}</span>
   </template>
-  <template
-    v-slot:finish>
-      <span>Done!</span>
+  <template v-slot:finish>
+    <span>Done!</span>
   </template>
-</vac>
+</countdown>
+```
+
+### TypeScript
+
+Vue 3 with TypeScript:
+```vue
+<template>
+  <vac :end-time="endTime">
+    <template v-slot:process="{ timeObj }">
+      <span>{{ `Lefttime: ${timeObj.m}:${timeObj.s}` }}</span>
+    </template>
+    <template v-slot:finish>
+      <span>Done!</span>
+    </template>
+  </vac>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { VueAwesomeCountdown } from 'vue-awesome-countdown'
+
+// TypeScript类型支持
+const endTime = ref(Date.now() + 60000)
+</script>
 ```
 
 ### SSR (Nuxt)
@@ -103,6 +130,18 @@ Vue2.6.0+.
     <span slot="finish">Done!</span>
   </vac>
 </no-ssr>
+
+<!-- Nuxt 3 -->
+<client-only>
+  <vac :end-time="Date.now() + 60000">
+    <template v-slot:process="{ timeObj }">
+      <span>{{ `Lefttime: ${timeObj.m}:${timeObj.s}` }}</span>
+    </template>
+    <template v-slot:finish>
+      <span>Done!</span>
+    </template>
+  </vac>
+</client-only>
 ```
 
 ## Example demo

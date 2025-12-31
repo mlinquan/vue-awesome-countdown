@@ -44,15 +44,15 @@ type CountdownState = 'beforeStart' | 'preheat' | 'process' | 'stopped' | 'pause
 
 // 定义组件属性
 const props = withDefaults(defineProps<{
-  startTime?: string | number | Date
-  endTime?: string | number | Date
+  startTime?: string | number | Date | null
+  endTime?: string | number | Date | null
   leftTime?: number
   autoStart?: boolean
   speed?: number
   tag?: string
 }>(), {
-  startTime: null,
-  endTime: null,
+  startTime: undefined,
+  endTime: undefined,
   leftTime: 0,
   autoStart: true,
   speed: 1000,
@@ -133,13 +133,22 @@ const clearTimer = () => {
 
 // 组件挂载时初始化
 onMounted(() => {
-  const startTime = (props.startTime && new Date(props.startTime).getTime()) || 0
-  const firstTime = (startTime && startTime - Date.now()) || 0
   if (props.autoStart) {
     state.value = 'preheat'
-    countdownTimer.value = setTimeout(() => {
-      startCountdown(true)
-    }, firstTime)
+    // 如果有startTime，等待到startTime再开始
+    if (props.startTime) {
+      const startTime = new Date(props.startTime).getTime()
+      const firstTime = startTime - Date.now()
+      countdownTimer.value = setTimeout(() => {
+        startCountdown(true)
+      }, firstTime)
+    }
+    // 否则立即开始
+    else {
+      countdownTimer.value = setTimeout(() => {
+        startCountdown(true)
+      }, 0)
+    }
   }
 })
 
@@ -153,9 +162,9 @@ const startCountdown = (restart?: boolean) => {
   if (state.value !== 'beforeStart' && state.value !== 'stopped' && state.value !== 'paused' && !restart) {
     return
   }
-  
+
   clearTimer()
-  
+
   if (restart) {
     // 重置状态
     state.value = 'beforeStart'
@@ -164,7 +173,7 @@ const startCountdown = (restart?: boolean) => {
     runTimes.value = 0
     usedTime.value = 0
     remainingTime.value = 0
-    
+
     // 重置时间对象
     timeObj.value = {
       ...timeObj.value,
@@ -177,19 +186,19 @@ const startCountdown = (restart?: boolean) => {
       ms: '000'
     }
   }
-  
+
   if (state.value === 'stopped') {
     remainingTime.value = (actualEndTime.value || 0) - Date.now()
   }
-  
+
   if (!actualEndTime.value) {
     actualEndTime.value = props.endTime ? new Date(props.endTime).getTime() : Date.now() + (remainingTime.value || props.leftTime)
   }
-  
+
   if (state.value === 'paused') {
     actualEndTime.value = Date.now() + remainingTime.value
   }
-  
+
   emit('start', exposed)
   state.value = 'process'
   doCountdown()
@@ -200,7 +209,7 @@ const stopCountdown = () => {
   if (state.value !== 'process') {
     return
   }
-  
+
   clearTimer()
   emit('stop', exposed)
   state.value = 'stopped'
@@ -211,7 +220,7 @@ const pauseCountdown = () => {
   if (state.value !== 'process') {
     return
   }
-  
+
   clearTimer()
   remainingTime.value = (actualEndTime.value || 0) - Date.now()
   emit('paused', exposed)
@@ -232,7 +241,7 @@ const switchCountdown = () => {
 const finishCountdown = () => {
   clearTimer()
   state.value = 'finished'
-  
+
   // 重置时间对象
   timeObj.value = {
     ...timeObj.value,
@@ -244,7 +253,7 @@ const finishCountdown = () => {
     s: '00',
     ms: '000'
   }
-  
+
   usedTime.value = Date.now() - (actualStartTime.value || 0)
   emit('finish', exposed)
 }
@@ -254,13 +263,13 @@ const doCountdown = () => {
   if (state.value !== 'process') {
     return
   }
-  
+
   if (!actualStartTime.value) {
     actualStartTime.value = Date.now()
   }
-  
+
   let leftTime = (actualEndTime.value || 0) - Date.now()
-  
+
   if (leftTime > 0) {
     let leftSeconds = leftTime / 1000
     let ms = leftTime % 1000
@@ -300,19 +309,19 @@ const doCountdown = () => {
     // 更新状态
     usedTime.value = Date.now() - (actualStartTime.value || 0)
     remainingTime.value = leftTime
-    
+
     // 更新时间对象
     timeObj.value = {
       endTime: actualEndTime.value,
       speed: props.speed,
       leftTime,
       usedTime: usedTime.value,
-      remainingTime,
+      remainingTime: remainingTime.value,
       ...txt,
       org,
       ceil
     }
-    
+
     emit('process', exposed)
   } else {
     finishCountdown()
@@ -327,21 +336,21 @@ const doCountdown = () => {
   if (leftTime < props.speed) {
     nextSpeed = leftTime
   }
-  
+
   countdownTimer.value = setTimeout(doCountdown, nextSpeed)
 }
 
 // 暴露给外部的对象
 const exposed = {
-  state,
-  attrs,
-  actualStartTime,
-  actualEndTime,
-  timeObj,
-  runTimes,
-  usedTime,
-  remainingTime,
-  thousandSpeed,
+  get state() { return state.value },
+  get attrs() { return attrs.value },
+  get actualStartTime() { return actualStartTime.value },
+  get actualEndTime() { return actualEndTime.value },
+  get timeObj() { return timeObj.value },
+  get runTimes() { return runTimes.value },
+  get usedTime() { return usedTime.value },
+  get remainingTime() { return remainingTime.value },
+  get thousandSpeed() { return thousandSpeed.value },
   startCountdown,
   stopCountdown,
   pauseCountdown,

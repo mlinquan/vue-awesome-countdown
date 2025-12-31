@@ -18,20 +18,54 @@ $ yarn add vue-awesome-countdown
 
 ### ES6
 
-```js
+#### 方式1：全局注册（推荐）
 
+```js
 import vueAwesomeCountdown from 'vue-awesome-countdown'
 
 Vue.use(vueAwesomeCountdown, 'vac') // Component name, `countdown` and `vac` by default
 ```
 
+#### 方式2：直接导入组件使用
+
+```js
+import { VueAwesomeCountdown } from 'vue-awesome-countdown'
+
+// 在Vue 2中局部注册
+new Vue({
+  components: {
+    VueAwesomeCountdown
+  }
+})
+
+// 在Vue 3中使用
+const app = createApp(App)
+app.component('VueAwesomeCountdown', VueAwesomeCountdown)
+```
+
 ### CommonJS
+
+#### 方式1：全局注册
 
 ```js
 var Vue = require('vue');
 var vueAwesomeCountdown = require('vue-awesome-countdown').default;
 
 Vue.use(vueAwesomeCountdown);
+```
+
+#### 方式2：直接导入组件使用
+
+```js
+var Vue = require('vue');
+var VueAwesomeCountdown = require('vue-awesome-countdown').VueAwesomeCountdown;
+
+// 在Vue 2中局部注册
+new Vue({
+  components: {
+    VueAwesomeCountdown
+  }
+});
 ```
 
 ### Browser
@@ -93,16 +127,66 @@ Vue2.6.0+.
 </vac>
 ```
 
+### Vue 3 使用方法
+
+#### 方式1：使用全局注册的组件
+
+```html
+<countdown :end-time="Date.now() + 60000">
+  <template v-slot:process="{ timeObj }">
+    <span>剩余时间: {{ timeObj.m }}:{{ timeObj.s }}</span>
+  </template>
+  <template v-slot:finish>
+    <span>倒计时结束！</span>
+  </template>
+</countdown>
+```
+
+#### 方式2：直接导入组件使用（Vue 3）
+
+```vue
+<template>
+  <VueAwesomeCountdown :left-time="101000"> <!-- 101秒 -->
+    <template #process="{ timeObj }">
+      {{ timeObj.ceil.s }}
+    </template>
+    <template #finish>Done!</template>
+  </VueAwesomeCountdown>
+</template>
+
+<script setup>
+import { VueAwesomeCountdown } from 'vue-awesome-countdown'
+</script>
+```
+
 ### SSR (Nuxt)
+
+#### Nuxt 2
+
 ```html
 <no-ssr>
   <vac :end-time="new Date().getTime() + 60000">
     <span
       slot="process"
-      slot-scope="{ timeObj }">{{ `Lefttime: ${timeObj.m}:${timeObj.s}` }}</span>
-    <span slot="finish">Done!</span>
+      slot-scope="{ timeObj }">剩余时间: {{ timeObj.m }}:{{ timeObj.s }}</span>
+    <span slot="finish">倒计时结束！</span>
   </vac>
 </no-ssr>
+```
+
+#### Nuxt 3
+
+```html
+<client-only>
+  <vac :end-time="Date.now() + 60000">
+    <template v-slot:process="{ timeObj }">
+      <span>剩余时间: {{ timeObj.m }}:{{ timeObj.s }}</span>
+    </template>
+    <template v-slot:finish>
+      <span>倒计时结束！</span>
+    </template>
+  </vac>
+</client-only>
 ```
 
 ## Example demo

@@ -18,20 +18,50 @@ $ yarn add vue-awesome-countdown
 
 ### ES6
 
-```js
+#### 方式1：全局注册（推荐）
 
+```js
 import vueAwesomeCountdown from 'vue-awesome-countdown'
 
 Vue.use(vueAwesomeCountdown, 'vac') // Component name, `countdown` and `vac` by default
 ```
 
+#### 方式2：直接导入组件使用
+
+```js
+import { VueAwesomeCountdown } from 'vue-awesome-countdown'
+
+// 在Vue 2中局部注册
+new Vue({
+  components: {
+    VueAwesomeCountdown
+  }
+})
+```
+
 ### CommonJS
+
+#### 方式1：全局注册
 
 ```js
 var Vue = require('vue');
 var vueAwesomeCountdown = require('vue-awesome-countdown').default;
 
 Vue.use(vueAwesomeCountdown);
+```
+
+#### 方式2：直接导入组件使用
+
+```js
+var Vue = require('vue');
+var VueAwesomeCountdown = require('vue-awesome-countdown').VueAwesomeCountdown;
+
+// 在Vue 2中局部注册
+new Vue({
+  components: {
+    VueAwesomeCountdown
+  }
+});
 ```
 
 ### Browser
@@ -84,7 +114,8 @@ Vue 2.6.0+ with v-slot:
 
 ### Vue 3
 
-Vue 3 with v-slot:
+#### 方式1：使用全局注册的组件
+
 ```html
 <countdown :end-time="Date.now() + 60000">
   <template v-slot:process="{ timeObj }">
@@ -96,9 +127,52 @@ Vue 3 with v-slot:
 </countdown>
 ```
 
+#### 方式2：直接导入组件使用
+
+```vue
+<template>
+  <VueAwesomeCountdown :end-time="Date.now() + 60000">
+    <template v-slot:process="{ timeObj }">
+      <span>{{ `Lefttime: ${timeObj.m}:${timeObj.s}` }}</span>
+    </template>
+    <template v-slot:finish>
+      <span>Done!</span>
+    </template>
+  </VueAwesomeCountdown>
+</template>
+
+<script setup>
+import { VueAwesomeCountdown } from 'vue-awesome-countdown'
+</script>
+```
+
 ### TypeScript
 
-Vue 3 with TypeScript:
+#### Vue 3 with TypeScript (直接导入组件)
+
+```vue
+<template>
+  <VueAwesomeCountdown :end-time="endTime">
+    <template v-slot:process="{ timeObj }">
+      <span>{{ `Lefttime: ${timeObj.m}:${timeObj.s}` }}</span>
+    </template>
+    <template v-slot:finish>
+      <span>Done!</span>
+    </template>
+  </VueAwesomeCountdown>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { VueAwesomeCountdown } from 'vue-awesome-countdown'
+
+// TypeScript类型支持
+const endTime = ref(Date.now() + 60000)
+</script>
+```
+
+#### Vue 3 with TypeScript (使用全局注册)
+
 ```vue
 <template>
   <vac :end-time="endTime">
@@ -113,7 +187,6 @@ Vue 3 with TypeScript:
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { VueAwesomeCountdown } from 'vue-awesome-countdown'
 
 // TypeScript类型支持
 const endTime = ref(Date.now() + 60000)

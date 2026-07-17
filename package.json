@@ -1,6 +1,6 @@
 {
   "name": "vue-awesome-countdown",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Countdown plug-in with high performance and high accuracy for Vue 2.5.0+ and Vue 3, with TypeScript support.",
   "main": "dist/vue-awesome-countdown.cjs.js",
   "module": "dist/vue-awesome-countdown.es.js",
